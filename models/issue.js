@@ -4,6 +4,13 @@
   var app = window.app;
   var Backbone = window.Backbone;
 
-  app.Issue = Backbone.Model.extend({
+  var Issue = app.Issue = Backbone.Model.extend({
+    urlRoot: app.apiBase + '/issues'
+  });
+
+  Issue.Collection = Backbone.Collection.extend({
+    model: Issue,
+
+    url: app.apiBase + '/issues'
   });
 })();
