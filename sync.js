@@ -75,4 +75,11 @@
     // Trigger the `'sync'` event.
     model.trigger('sync', model, res, options);
   };
+
+  // Override `Backbone.ajax` for JSONP support.
+  var ajax = Backbone.ajax;
+  Backbone.ajax = function (options) {
+    options.url += (~options.url.indexOf('?') ? '&' : '?') + 'callback=?';
+    ajax.apply(this, arguments);
+  };
 })();
