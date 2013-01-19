@@ -21,6 +21,9 @@
     // but only if the `options.remote` flag is set to `true`.
     if (method === 'read' && options.remote) return sync.apply(this, arguments);
 
+    // Trigger the `'request'` event (for symmetry with stock sync).
+    model.trigger('request', model, {}, options);
+
     // Use `localStorage` for persistence.
     var ls = window.localStorage;
 
@@ -28,10 +31,10 @@
     var res;
 
     // Use the model's URL as a unique storage identifier.
-    var endPoint = _.result(model, 'urlRoot') || _.result(model, 'url');
+    var url = _.result(model, 'urlRoot') || _.result(model, 'url');
 
     // Grab the models hash for the endpoint.
-    var models = ls.getItem(endPoint);
+    var models = ls.getItem(url);
     models = models ? JSON.parse(models) : {};
 
     // Start a switch to cover every CRUD case.
@@ -49,7 +52,7 @@
 
       // Save the model to `localStorage`
       models[res.id] = res;
-      ls.setItem(endPoint, JSON.stringify(models));
+      ls.setItem(url, JSON.stringify(models));
       break;
 
     // Set the appropriate response data for READ.
@@ -63,11 +66,8 @@
     case 'delete':
       res = {};
       delete models[model.id];
-      ls.setItem(endPoint, JSON.stringify(models));
+      ls.setItem(url, JSON.stringify(models));
     }
-
-    // Trigger the `'request'` event (for symmetry with AJAX sync).
-    model.trigger('request', model, {}, options);
 
     // Fire the success callback.
     options.success(model, res, options);

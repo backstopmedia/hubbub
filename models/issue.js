@@ -2,13 +2,12 @@
   'use strict';
 
   var app = window.app;
-  var Backbone = window.Backbone;
 
-  var Issue = app.Issue = Backbone.Model.extend({
+  var Issue = app.Issue = app.Model.extend({
     urlRoot: app.apiBase + '/issues'
   });
 
-  Issue.Collection = Backbone.Collection.extend({
+  Issue.Collection = app.Collection.extend({
     model: Issue,
 
     url: app.apiBase + '/issues'
