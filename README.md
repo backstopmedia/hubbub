@@ -1,6 +1,8 @@
 Backstop Media - Backbone.js
 ============================
 
+[View Demo Page](http://backstopmedia.github.com/backbone)
+
 Example
 -------
 
