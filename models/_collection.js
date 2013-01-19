@@ -7,7 +7,11 @@
   app.Collection = Backbone.Collection.extend({
     parse: function (res, options) {
       options.parse = false;
-      return options.remote ? res.data : res;
+      if (options.remote) {
+        if (res.data.message === 'Not Found') return this.models;
+        return res.data;
+      }
+      return res;
     }
   });
 })();

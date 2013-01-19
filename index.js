@@ -7,7 +7,7 @@
   var app = window.app = {
 
     // Define the base for GitHub's API endpoints.
-    apiBase: 'https://api.github.com',
+    apiRoot: 'https://api.github.com',
 
     // Set up initial view, load initial data, etc...
     init: function () {

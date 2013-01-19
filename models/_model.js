@@ -6,8 +6,13 @@
 
   app.Model = Backbone.Model.extend({
     parse: function (res, options) {
+      console.log(res);
       options.parse = false;
-      return options.remote ? res.data : res;
+      if (options.remote) {
+        if (res.data.message === 'Not Found') return this.attributes;
+        return res.data;
+      }
+      return res;
     }
   });
 })();
