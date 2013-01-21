@@ -81,12 +81,12 @@
   Backbone.ajax = function (options) {
     var success = options.success;
     options.success = function (resp, __, xhr) {
-      xhr.meta = resp.meta;
-      xhr.data = resp.data;
-      if (resp.meta.status < 300) return success(resp.data);
+      var meta = xhr.meta = resp.meta;
+      var data = xhr.data = resp.data;
+      if (meta.status < 300) return success(data);
       options.error(xhr);
     };
-    options.url += (~options.url.indexOf('?') ? '&' : '?') + 'callback=?';
+    options.dataType = 'jsonp';
     return ajax.apply(this, arguments);
   };
 })();
