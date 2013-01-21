@@ -11,7 +11,33 @@
 
     // Set up initial view, load initial data, etc...
     init: function () {
-      // TODO
+      var login = window.prompt('What is your username?');
+      (new app.User({login: login})).fetch({
+        remote: true,
+        success: function (user) {
+          $('body').append($('<div>').text('User: ' + JSON.stringify(user)));
+          user.repos.fetch({
+            remote: true,
+            success: function (repos) {
+              $('body').append($('<div>').text('Repos: ' +
+                JSON.stringify(repos)));
+              repos.each(function (repo) {
+                repo.issues.fetch({
+                  remote: true,
+                  success: function (issues) {
+                    $('body').append($('<div>').text('Issues for ' +
+                      repo.get('name') + ': ' + JSON.stringify(issues)));
+                  }
+                });
+              });
+            }
+          });
+        },
+        error: function (user, xhr) {
+          $('body').text('Unable to fetch ' + login + '. Error: ' +
+            xhr.data.message);
+        }
+      });
     }
   };
 

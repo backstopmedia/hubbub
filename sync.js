@@ -79,7 +79,14 @@
   // Override `Backbone.ajax` for JSONP support.
   var ajax = Backbone.ajax;
   Backbone.ajax = function (options) {
+    var success = options.success;
+    options.success = function (resp, __, xhr) {
+      xhr.meta = resp.meta;
+      xhr.data = resp.data;
+      if (resp.meta.status !== 200) return options.error.call(this, xhr);
+      success.apply(this, resp.data);
+    };
     options.url += (~options.url.indexOf('?') ? '&' : '?') + 'callback=?';
-    ajax.apply(this, arguments);
+    return ajax.apply(this, arguments);
   };
 })();
