@@ -5,34 +5,69 @@ Backstop Media - Backbone.js
 
 [View Test Suite](http://backstopmedia.github.com/backbone/test)
 
-Example
--------
+API
+---
+
+### Models
+
+#### app.User
+
+A user model that can be mapped to a GitHub user. Each `user` also has a `repos`
+collection property.
 
 ```js
-// Fetch the org info for `login` 'backstopmedia'.
-var org = new app.Org({login: 'backstopmedia'});
-org.fetch({
-  remote: true,
+var backstopmedia = new app.User({login: 'backstopmedia'});
+
+// Fetch public information for this user.
+backstopmedia.fetch({
+  remote: true, // fetch from GitHub, not localStorage
   success: function () {
-    console.log(org.attributes);
+    console.log(backstopmedia.attributes);
+  }
+});
 
-    // Fetch all of the `repos` for 'backstopmedia'.
-    org.repos.fetch({
-      remote: true,
-      success: function (repos) {
-        console.log(repos.models);
-
-        // Fetch the issues for the 'backbone' repo.
-        repos.where({name: 'backbone'})[0].issues.fetch({
-          remote: true,
-          success: function(issues) {
-
-            // Winning.
-            console.log(issues.models);
-          }
-        });
-      }
-    });
+// Fetch all of the repos for this user.
+backstopmedia.repos.fetch({
+  remote: true,
+  success: function (repos) {
+    console.log(repos.pluck('name'));
   }
 });
 ```
+
+#### app.Org
+
+An org model that has an identical API to `app.User`.
+
+#### app.Repo
+
+A repo model that can be mapped to a GitHub repo. Each `repo` also has an
+`issues` collection property.
+
+```js
+var backbone = new app.Repo({
+  name: 'backbone',
+  owner: {login: 'backstopmedia'}
+});
+
+// Fetch public information for this repo.
+backbone.fetch({
+  remote: true,
+  success: function () {
+    console.log(backbone.attributes);
+  }
+});
+
+// Fetch all of the issues for this repo.
+backbone.issues.fetch({
+  remote: true,
+  success: function (issues) {
+    console.log(issues.pluck('title'));
+  }
+});
+```
+
+#### app.Issue
+
+An issue model that can be mapped to a GitHub issue. These should be fetched
+from a `repo` model rather than instatiated on their own.
