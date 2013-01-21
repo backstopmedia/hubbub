@@ -3,6 +3,8 @@ Backstop Media - Backbone.js
 
 [View Demo Page](http://backstopmedia.github.com/backbone)
 
+[View Test Suite](http://backstopmedia.github.com/backbone/test)
+
 Example
 -------
 
