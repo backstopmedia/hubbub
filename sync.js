@@ -83,8 +83,8 @@
     options.success = function (resp, __, xhr) {
       xhr.meta = resp.meta;
       xhr.data = resp.data;
-      if (resp.meta.status !== 200) return options.error.call(this, xhr);
-      success.apply(this, resp.data);
+      if (resp.meta.status < 300) return success(resp.data);
+      options.error(xhr);
     };
     options.url += (~options.url.indexOf('?') ? '&' : '?') + 'callback=?';
     return ajax.apply(this, arguments);
