@@ -17,7 +17,7 @@
     }
   });
 
-  Issue.Collection = app.Collection.extend({
+  Issue.Collection = app.Model.Collection.extend({
     model: Issue,
 
     url: function () {

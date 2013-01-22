@@ -4,5 +4,9 @@
   var app = window.app;
   var Backbone = window.Backbone;
 
-  app.Model = Backbone.Model.extend({});
+  var Model = app.Model = Backbone.Model.extend({});
+
+  Model.Collection = Backbone.Collection.extend({
+    model: Model
+  });
 })();

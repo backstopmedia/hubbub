@@ -16,7 +16,7 @@
     urlRoot: app.apiRoot + '/users'
   });
 
-  User.Collection = app.Collection.extend({
+  User.Collection = app.Model.Collection.extend({
     model: User,
 
     url: app.apiRoot + '/users'

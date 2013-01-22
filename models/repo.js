@@ -20,7 +20,7 @@
     }
   });
 
-  Repo.Collection = app.Collection.extend({
+  Repo.Collection = app.Model.Collection.extend({
     model: Repo,
 
     url: function () {
