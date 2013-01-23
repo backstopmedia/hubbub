@@ -12,12 +12,19 @@
     <script src='index.js'></script>
     <script src='sync.js'></script>
     <script src='models/model.js'></script>
+    <script src='models/board.js'></script>
     <script src='models/user.js'></script>
-    <script src='models/org.js'></script>
     <script src='models/repo.js'></script>
     <script src='models/issue.js'></script>
     <script src='views/view.js'></script>
+    <script src='views/main.js'></script>
     <script src='views/issue.js'></script>
+    <script id='js-main-view-template' type='text/template'>
+      <input id='js-add-input'><button id='js-add-button'>Add</button>
+      <div id='js-message' class='box'>
+        Please enter an owner or owner/repo combo.
+      </div>
+    </script>
   </head>
 
   <body>

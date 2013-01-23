@@ -83,6 +83,7 @@
     options.success = function (resp, __, xhr) {
       var meta = xhr.meta = resp.meta;
       var data = xhr.data = resp.data;
+      xhr.status = meta.status;
       if (meta.status < 300) return success(data);
       options.error(xhr);
     };

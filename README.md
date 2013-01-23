@@ -10,6 +10,12 @@ API
 
 ### Models
 
+#### app.Board
+
+A board holds all of the information pertinent to the kanban. `app.board` is
+defined during the app's initialization and should be used for adding and
+removing user repos and preferences.
+
 #### app.User
 
 A user model that can be mapped to a GitHub user. Each `user` also has a `repos`
@@ -34,10 +40,6 @@ backstopmedia.repos.fetch({
   }
 });
 ```
-
-#### app.Org
-
-An org model that has an identical API to `app.User`.
 
 #### app.Repo
 

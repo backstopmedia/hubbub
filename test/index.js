@@ -36,12 +36,6 @@ window.jQuery(function () {
     equal(_.result(user, 'url'), url);
   });
 
-  test('org url is correct', function () {
-    var org = new app.Org({login: 'backstopmedia'});
-    var url = 'https://api.github.com/orgs/backstopmedia';
-    equal(_.result(org, 'url'), url);
-  });
-
   test('repo url is correct', function () {
     var repo = new app.Repo({
       name: 'backbone',
@@ -58,5 +52,13 @@ window.jQuery(function () {
     });
     var url = 'https://api.github.com/repos/backstopmedia/backbone/issues';
     equal(_.result(repo.issues, 'url'), url);
+  });
+
+  test('repo should have an owner/name style displayName', function () {
+    var repo = new app.Repo({
+      name: 'backbone',
+      owner: {login: 'backstopmedia'}
+    });
+    equal(repo.displayName(), 'backstopmedia/backbone');
   });
 });

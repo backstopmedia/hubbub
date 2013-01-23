@@ -1,3 +1,25 @@
 body {
-  font: 'Helvetica Neue', Helvetica, 'Lucida Grande', Arial, sans-serif;
+  margin: 0;
+  padding: 25px;
+  font-size: 16px;
+  font-family: 'Helvetica Neue', Helvetica, 'Lucida Grande', Arial, sans-serif;
+}
+
+.box {
+  padding: 10px;
+  border: 1px solid #333;
+  color: #333;
+  background: #CCC;
+}
+
+.js-error {
+  border-color: #600;
+  color: #600;
+  background: #FCC;
+}
+
+.js-success {
+  border-color: #060;
+  color: #060;
+  background: #CFC;
 }
