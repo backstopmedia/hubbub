@@ -14,6 +14,7 @@
     },
 
     url: function () {
+      // TODO make 'owner' an app.User
       var login = this.get('owner').login;
       var name = this.get('name');
       return app.apiRoot + '/repos/' + login + '/' + name;

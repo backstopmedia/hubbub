@@ -10,11 +10,11 @@
   app.MainView = app.View.extend({
     events: {
       'click #js-add-button': 'search',
-      'keydown #js-add-input': 'search'
+      'keydown #js-add-input': 'search',
+      'click .js-repo-result': 'repoClicked'
     },
 
     search: function (ev) {
-
       // Check for the enter key (keycode 13) if this is a keydown event.
       if (ev.type === 'keydown' && ev.which !== 13) return;
 
@@ -35,6 +35,12 @@
         var user = new app.User({login: match[1]});
         this.findReposFor(user);
       }
+    },
+
+    repoClicked: function (ev) {
+      var repoId = $(ev.target).attr('data-repo-id');
+      var repo = this.repos.get(repoId);
+      this.addRepo(repo);
     },
 
     addRepo: function (repo) {
@@ -70,8 +76,9 @@
       user.repos.fetch({
         remote: true,
         success: function (repos) {
-          var message = 'Found:<br>' + repos.invoke('displayName').join('<br>');
-          self.message(message, 'success');
+          // TODO use events on this collection for rendering
+          self.repos = repos;
+          self.message(_.template(self.searchResultsTemplate, {repos: repos}), 'success');
         },
         error: function (repos, xhr) {
           self.message(xhr.status + ' ' + xhr.data.message, 'error');
@@ -81,6 +88,8 @@
 
     render: function () {
       this.$el.html(_.template($('#js-main-view-template').html(), {}));
+      // cache the search results template, since it will be used repeatedly
+      this.searchResultsTemplate = $('#js-search-results-template').html();
       return this;
     }
   });

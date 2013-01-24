@@ -25,6 +25,16 @@
         Please enter a user or user/repo combo.
       </div>
     </script>
+    <script id='js-search-results-template' type='text/template'>
+      Found:
+      <ul>
+        <% repos.each(function (repo) { %>
+          <li>
+            <a href='#' class='js-repo-result' data-repo-id='<%= repo.id %>'><%= repo.displayName() %></a>
+          </li>
+        <% }); %>
+      </ul>
+    </script>
   </head>
 
   <body>
