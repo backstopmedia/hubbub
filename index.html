@@ -19,7 +19,7 @@
       <ul>
         <% repos.each(function (repo) { %>
           <li>
-            <a href='#' class='js-repo-result' data-repo-id='<%= repo.id %>'><%= repo.displayName() %></a>
+            <a href='#' class='js-repo-result' data-repo-id='<%= repo.id %>'><%- repo.displayName() %></a>
           </li>
         <% }); %>
       </ul>
@@ -27,9 +27,11 @@
     <script id='js-issue-list-template' type='text/template'>
       <h2><%= title %></h2>
       <ul>
-        <% _.each(issues, function (issue) { %>
+        <% issues.each(function (issue) { %>
           <li>
-            <%= issue.displayName() %>
+            <a href='<%- issue.get('html_url') %>'>
+              <%- issue.displayName() %>
+            </a>
           </li>
         <% }); %>
       </ul>

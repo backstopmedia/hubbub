@@ -9,12 +9,16 @@
       this.repos = new app.Repo.Collection();
       this.repos.owner = this;
       this.issues = new app.Issue.Collection();
-      this.listenTo(this.repos, 'add', function (repo) {
-        this.issues.listenTo(repo.issues, 'add', this.issues.add);
-        this.issues.listenTo(repo.issues, 'remove', this.issues.remove);
+      this.issues.listenTo(this.repos, 'add', function (repo) {
+        this.listenTo(repo.issues, 'add', function (issue) {
+          this.add(issue);
+        });
+        this.listenTo(repo.issues, 'remove', function (issue) {
+          this.remove(issue);
+        });
       });
-      this.listenTo(this.repos, 'remove', function (repo) {
-        this.issues.stopListening(repo.issues);
+      this.issues.listenTo(this.repos, 'remove', function (repo) {
+        this.stopListening(repo.issues);
       });
     },
 

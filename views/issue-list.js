@@ -5,20 +5,20 @@
   var _ = window._;
   var app = window.app;
 
-  var tpl = $('#js-issue-list-template').html();
-
   app.IssueListView = app.View.extend({
     className: 'js-issue-list',
 
+    template: _.template($('#js-issue-list-template').html()),
+
     initialize: function () {
       // TODO make more efficient?
-      this.listenTo(this.collection, 'add', this.render);
+      this.listenTo(this.collection, 'add', _.debounce(this.render));
     },
 
     render: function () {
-      this.$el.html(_.template(tpl, {
+      this.$el.html(this.template({
         title: 'Uncategorized',
-        issues: this.collection.models
+        issues: this.collection
       }));
     }
   });

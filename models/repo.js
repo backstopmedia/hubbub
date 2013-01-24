@@ -32,6 +32,8 @@
   });
 
   Repo.Collection = app.Model.Collection.extend({
+    comparator: function (repo) { return repo.displayName(); },
+
     model: Repo,
 
     url: function () {
