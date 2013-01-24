@@ -9,11 +9,11 @@
 
   app.MainView = app.View.extend({
     events: {
-      'click #js-add-button': 'add',
-      'keydown #js-add-input': 'add'
+      'click #js-add-button': 'search',
+      'keydown #js-add-input': 'search'
     },
 
-    add: function (ev) {
+    search: function (ev) {
 
       // Check for the enter key (keycode 13) if this is a keydown event.
       if (ev.type === 'keydown' && ev.which !== 13) return;
@@ -32,7 +32,8 @@
       // Without a second capture group, the user must be searching for a
       // GitHub user.
       } else {
-        this.findReposFor(new app.User({login: match[1]}));
+        var user = new app.User({login: match[1]});
+        this.findReposFor(user);
       }
     },
 
