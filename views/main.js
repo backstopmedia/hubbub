@@ -21,13 +21,11 @@
       var val = this.$('#js-add-input').val();
       var match = val.match(addRe);
       if (!match) {
-        var message = 'Please enter a valid user or user/repo combo.';
-        return this.message(message, 'error');
-      }
+        this.message('Please enter a valid user or user/repo combo.', 'error');
 
       // If there was a match in the second capture group, the entry is for
       // a repo.
-      if (match[2]) {
+      } else if (match[2]) {
         var repo = new app.Repo({name: match[2], owner: {login: match[1]}});
         this.addRepo(repo);
 
@@ -39,7 +37,7 @@
     },
 
     addRepo: function (repo) {
-      this.message('Fetching...');
+      this.message('Fetching...', 'pending');
       var self = this;
       repo.fetch({
         remote: true,
@@ -66,7 +64,7 @@
 
     // Find repos for the given user and display them.
     findReposFor: function (user) {
-      this.message('Fetching...');
+      this.message('Fetching...', 'pending');
       var self = this;
       user.repos.fetch({
         remote: true,
