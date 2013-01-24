@@ -7,7 +7,6 @@
   var Board = app.Board = app.Model.extend({
     initialize: function () {
       this.repos = new app.Repo.Collection();
-      this.repos.owner = this;
       this.issues = new app.Issue.Collection();
       this.issues.listenTo(this.repos, 'add', function (repo) {
         this.listenTo(repo.issues, 'add', function (issue) {
