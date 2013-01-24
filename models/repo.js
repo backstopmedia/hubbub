@@ -11,6 +11,11 @@
     initialize: function () {
       this.issues = new app.Issue.Collection();
       this.issues.repo = this;
+
+      // add all issues to the master set
+      this.listenTo(this.issues, 'add', function (issue) {
+        app.board.allIssues.add(issue);
+      });
     },
 
     url: function () {

@@ -13,6 +13,11 @@
       // setup child views
       var sidebarView = new app.SidebarView({el: this.$('#js-sidebar')});
       sidebarView.render();
+
+      // TODO split into categories
+      var allIssuesView = new app.IssueListView({collection: app.board.allIssues});
+      allIssuesView.render();
+      this.$el.append(allIssuesView.$el);
     }
   });
 })();

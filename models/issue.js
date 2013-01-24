@@ -14,6 +14,11 @@
 
     urlRoot: function () {
       return this.repo.url() + '/issues';
+    },
+
+    displayName: function () {
+      var repo = this.repo;
+      return repo.get('owner').login + '/' + repo.get('name') + '#' + this.get('number') + ': ' + this.get('title');
     }
   });
 
