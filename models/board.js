@@ -19,7 +19,6 @@
     },
 
     parse: function (res) {
-      if (!res) return {};
       this.repos.update(res.repos);
       delete res.repos;
       return res;
@@ -27,7 +26,7 @@
 
     toJSON: function () {
       var attrs = _.clone(this.attributes);
-      attrs.repos = this.repos.toJSON();
+      attrs.repos = this.repos.pluck('id');
       return attrs;
     },
 
