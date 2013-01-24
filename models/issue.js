@@ -17,8 +17,10 @@
     },
 
     displayName: function () {
-      var repo = this.repo;
-      return repo.get('owner').login + '/' + repo.get('name') + '#' + this.get('number') + ': ' + this.get('title');
+      var repo = this.repo.displayName();
+      var number = this.get('number');
+      var title = this.get('title');
+      return repo + '#' + number + ': ' + title;
     }
   });
 

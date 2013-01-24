@@ -8,25 +8,31 @@
     initialize: function () {
       this.repos = new app.Repo.Collection();
       this.repos.owner = this;
-
-      this.allIssues = new app.Issue.Collection();
-
-      // retrieve all issues for any newly added repos
+      this.issues = new app.Issue.Collection();
       this.listenTo(this.repos, 'add', function (repo) {
-        // TODO not sure why silent:false is needed here
-        repo.issues.fetch({remote: true, silent: false});
-      } );
+        this.issues.listenTo(repo.issues, 'add', this.issues.add);
+        this.issues.listenTo(repo.issues, 'remove', this.issues.remove);
+      });
+      this.listenTo(this.repos, 'remove', function (repo) {
+        this.issues.stopListening(repo.issues);
+      });
     },
 
     parse: function (res) {
       this.repos.update(res.repos);
+
+      // **Don't** fetch on the collection (i.e. repos.fetch()), but
+      // individually as the repos collection spans many owners and the
+      // issues collection spans many repos.
+      this.repos.invoke('fetch');
+      _.invoke(_.pluck(this.repos.models, 'issues'), 'fetch', {update: true});
       delete res.repos;
       return res;
     },
 
     toJSON: function () {
       var attrs = _.clone(this.attributes);
-      attrs.repos = this.repos.pluck('id');
+      attrs.repos = this.repos.invoke('toBoard');
       return attrs;
     },
 

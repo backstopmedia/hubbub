@@ -7,7 +7,11 @@
 
   var addRe = /^(\w+)(?:\/([\w.\-]+))?$/;
 
+  var syncError
+
   app.SidebarView = app.View.extend({
+    template: _.template($('#js-search-results-template').html()),
+
     events: {
       'click #js-add-button': 'search',
       'keydown #js-add-input': 'search',
@@ -44,7 +48,7 @@
     },
 
     addRepo: function (repo) {
-      this.message('Fetching...', 'pending');
+      this.message('Fetching repo...', 'pending');
       var self = this;
       repo.fetch({
         remote: true,
@@ -53,13 +57,25 @@
         // and save.
         success: function () {
           app.board.repos.add(repo);
-          self.message('Added:<br>' + JSON.stringify(repo), 'success');
+          self.message('Repo found, fetching issues...', 'pending');
+          repo.issues.fetch({
+            update: true,
+            remote: true,
+            success: function (issues) {
+              issues.invoke('save');
+              repo.save();
+              app.board.save();
+              self.message('Added: ' + repo.displayName(), 'success');
+            },
+            error: function (__, xhr) {
+              app.board.repos.remove(repo);
+              self.syncError(__, xhr);
+            }
+          });
         },
 
         // Display an error if one occurs.
-        error: function (repo, xhr) {
-          self.error(xhr.status + ' ' + xhr.data.message, 'error');
-        }
+        error: _.bind(this.syncError, this)
       });
     },
 
@@ -71,24 +87,21 @@
 
     // Find repos for the given user and display them.
     findReposFor: function (user) {
-      this.message('Fetching...', 'pending');
+      this.message('Fetching user...', 'pending');
       var self = this;
       user.repos.fetch({
         remote: true,
         success: function (repos) {
           // TODO use events on this collection for rendering
           self.repos = repos;
-          self.message(_.template(self.searchResultsTemplate, {repos: repos}), 'success');
+          self.message(self.template({repos: repos}), 'success');
         },
-        error: function (repos, xhr) {
-          self.message(xhr.status + ' ' + xhr.data.message, 'error');
-        }
+        error: _.bind(this.syncError, this)
       });
     },
 
-    render: function () {
-      // cache the search results template, since it will be used repeatedly
-      this.searchResultsTemplate = $('#js-search-results-template').html();
+    syncError: function (__, xhr) {
+      this.message(xhr.status + ' ' + xhr.data.message, 'error');
     }
   });
 })();

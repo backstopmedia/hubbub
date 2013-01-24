@@ -12,11 +12,11 @@
     // Set up initial view, load initial data, etc...
     init: function () {
       app.board = new app.Board({id: 1});
-      // retrieve previously saved data from localhost
-      app.board.fetch();
-
       var mainView = new app.MainView();
       mainView.render();
+
+      // retrieve previously saved data from localhost
+      app.board.fetch();
       $('body').append(mainView.$el);
     }
   };
