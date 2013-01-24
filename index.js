@@ -14,7 +14,10 @@
       app.board = new app.Board({id: 1});
       // retrieve previously saved data from localhost
       app.board.fetch();
-      $('body').append((new app.MainView()).render().el);
+
+      var mainView = new app.MainView();
+      mainView.render();
+      $('body').append(mainView.$el);
     }
   };
 
