@@ -19,7 +19,7 @@
       <ul>
         <% repos.each(function (repo) { %>
           <li>
-            <a href='#' class='js-repo-result' data-repo-id='<%= repo.id %>'><%- repo.displayName() %></a>
+            <a class='js-repo-result' data-repo-id='<%= repo.id %>'><%- repo.displayName() %></a>
           </li>
         <% }); %>
       </ul>
