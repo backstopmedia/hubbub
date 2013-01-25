@@ -32,14 +32,14 @@
             <a href='<%- issue.get('html_url') %>'>
               <%- issue.displayName() %>
             </a><br>
-            <%= markdown.toHTML(issue.get('body')) %>
+            <%= marked.parse(issue.get('body')) %>
           </li>
         <% }); %>
       </ul>
     </script>
     <script src='vendor/json2.js'></script>
     <script src='vendor/jquery.js'></script>
-    <script src='vendor/markdown.js'></script>
+    <script src='vendor/marked.js'></script>
     <script src='vendor/underscore.js'></script>
     <script src='vendor/backbone.js'></script>
     <script src='index.js'></script>
