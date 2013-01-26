@@ -21,7 +21,7 @@
     },
 
     urlRoot: function () {
-      return app.apiRoot + '/users/' + this.get('owner').login + '/repos?per_page=100';
+      return app.apiRoot + '/users/' + this.get('owner').login + '/repos';
     },
 
     toBoard: function () {
@@ -37,8 +37,8 @@
     model: Repo,
 
     url: function () {
-      var url = this.owner ? (this.owner.url() + '/repos') : (app.apiRoot + '/repositories');
-      return url + '?per_page=100';
+      if (this.owner) return this.owner.url() + '/repos';
+      return app.apiRoot + '/repositories';
     }
   });
 })();

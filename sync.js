@@ -19,7 +19,10 @@
 
     // READ is the only case to proxy to the original `Backbone.sync`,
     // but only if the `options.remote` flag is set to `true`.
-    if (method === 'read' && options.remote) return sync.apply(this, arguments);
+    if (method === 'read' && options.remote) {
+      options.data = _.extend({}, options.data, {per_page: 100});
+      return sync.apply(this, arguments);
+    }
 
     // Trigger the `'request'` event (for symmetry with stock sync).
     model.trigger('request', model, {}, options);
