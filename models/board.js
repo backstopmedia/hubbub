@@ -3,7 +3,7 @@
 
   var app = window.app;
 
-  var Board = app.Board = {};
+  var Board = app.Board = app.Board || {};
   
   Board.Model = Backbone.Model.extend({
     urlRoot: '/boards',

@@ -4,7 +4,9 @@
   var _ = window._;
   var app = window.app;
 
-  var Repo = app.Repo = app.Model.extend({
+  var Repo = app.Repo = app.Repo || {};
+
+  Repo.Model = Backbone.Model.extend({
     displayName: function () {
       return this.get('owner').login + '/' + this.get('name');
     },
@@ -31,10 +33,10 @@
     }
   });
 
-  Repo.Collection = app.Model.Collection.extend({
+  Repo.Collection = Backbone.Collection.extend({
     comparator: function (repo) { return repo.displayName(); },
 
-    model: Repo,
+    model: Repo.Model,
 
     url: function () {
       if (this.owner) return this.owner.url() + '/repos';
