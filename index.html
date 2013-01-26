@@ -6,142 +6,21 @@
     <title>Hubbub - Backbone.js Example App from Backstop Media</title>
     <link href='css/index.css' rel='stylesheet' type='text/css'>
 
-    <script id='js-search-results-template' type='text/template'>
-      <h4>Found:</h4>
-      <ul>
-        <% repos.each(function (repo) { %>
-          <li>
-            <a class='js-repo-result' data-repo-id='<%= repo.id %>'><%- repo.displayName() %></a>
-          </li>
-        <% }); %>
-      </ul>
-    </script>
-
-    <script id='js-issue-list-template' type='text/template'>
-      <h4><%= title %></h4>
-      <ul></ul>
-    </script>
-    <script id='js-issue-item-template' type='text/template'>
-      <a href='#issue/<%- issue.id %>'><%- issue.displayName() %></a>
-    </script>
-
-    <!-- piggyback off Bootstrap Modal styles -->
-    <script id='js-issue-modal-template' type='text/template'>
-      <div class='modal-mask'>
-        <div class='modal'>
-          <div class='modal-header'>
-            <a target='_blank' href='<%- issue.get('html_url') %>'>
-              <div class='modal-top-line'>
-                <div class='issue-repo'>
-                  <%- issue.repo.displayName() %>
-                </div>
-                <div class='issue-number'>
-                  #<%= issue.get('number') %>
-                </div>
-              </div>
-              <div class='issue-title'>
-                <%- issue.get('title') %>
-              </div>
-            </a>
-          </div>
-          <div class='modal-body'>
-            <%= marked.parse(issue.get('body')) %>
-          </div>
-          <div class='modal-footer'>
-            <select name='category' autofocus>
-              <option value='default' <% if (issue.get('category') === 'default') { %>selected<% } %>>Uncategorized</option>
-              <option value='todo' <% if (issue.get('category') === 'todo') { %>selected<% } %>>To Do</option>
-              <option value='doing' <% if (issue.get('category') === 'doing') { %>selected<% } %>>Doing</option>
-              <option value='done' <% if (issue.get('category') === 'done') { %>selected<% } %>>Done</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <script id='js-welcome-modal-template' type='text/template'>
-      <div class='modal-mask'>
-        <div class='modal'>
-          <div class='modal-header'>
-            <h3>Welcome To Hubbub</h3>
-          </div>
-          <div class='modal-body'>
-            <p>This example Backbone App allows you to prioritize and manage issues from several
-              GitHub repos on a Kanban style board.</p>
-            <p>GitHub data is read from the public API and your priorities are saved to local storage.</p>
-          </div>
-          <div class='modal-footer'>
-            <button class='btn exit'>Close</button>
-          </div>
-        </div>
-      </div>
-    </script>
-
-    <script id='js-repo-list-template' type='text/template'>
-      <% repos.each(function (repo) { %>
-        <li>
-          <%- repo.displayName() %>
-          <a data-repo-id='<%= repo.id %>' class='js-repo-remove btn btn-danger btn-small'>Remove</a>
-        </li>
-      <% }); %>
-    </script>
-
-    <script id='js-sidebar-template' type='text/template'>
-      <div class='repo-search'>
-        <form class='form-search'>
-          <input type='text' placeholder='documentcloud/backbone' id='js-add-input' />
-          <button id='js-add-button' class='btn'>Find</button>
-        </form>
-        <div id='js-message' class='alert empty'></div>
-        <div class='well empty' id='js-repo-search-list'></div>
-      </div>
-      <!-- filter view will be injected here -->
-    </script>
-
-    <script id='js-repo-filter-item-template' type='text/template'>
-      <input type='checkbox' checked> <%- repo.displayName() %></label>
-      <i class='js-refresh icon-refresh'></i>
-      <i class='js-remove icon-remove'></i>
-    </script>
-
-
     <!-- Vendor. -->
     <script src='vendor/marked.js'></script>
     <script src='vendor/jquery.js'></script>
     <script src='vendor/underscore.js'></script>
     <script src='vendor/backbone.js'></script>
 
-    <!-- Application. -->
-    <script src='index.js'></script>
-    <script src='sync.js'></script>
+    <!-- Application files go here. -->
 
-    <!-- Models. -->
-    <script src='models/board.js'></script>
-    <script src='models/user.js'></script>
-    <script src='models/repo.js'></script>
-    <script src='models/issue.js'></script>
+    <!-- Models go here. -->
 
-    <!-- Collections. -->
-    <script src='collections/board.js'></script>
-    <script src='collections/issue.js'></script>
+    <!-- Collections go here. -->
 
-    <!-- Views. -->
-    <script src='views/view.js'></script>
-    <script src='views/main.js'></script>
-    <script src='views/sidebar.js'></script>
-    <script src='views/list.js'></script>
-    <script src='views/item.js'></script>
-    <script src='views/issue-holder.js'></script>
-    <script src='views/issue-list.js'></script>
-    <script src='views/repo-list.js'></script>
-    <script src='views/modal.js'></script>
-    <script src='views/issue-modal.js'></script>
-    <script src='views/welcome-modal.js'></script>
-    <script src='views/list.js'></script>
-    <script src='views/repo-filter-item.js'></script>
+    <!-- Views go here. -->
 
-    <!-- Routers. -->
-    <script src='routers/router.js'></script>
+    <!-- Routers go here. -->
   </head>
 
   <body>

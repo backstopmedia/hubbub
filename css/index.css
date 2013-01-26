@@ -30,86 +30,8 @@ a {
   background: #FCC;
 }
 
-.form-search input {
-    box-sizing: border-box;
-    padding: 15px 10px;
-}
-.alert.empty,
-.well.empty {
-  display: none;
-}
-
 .js-success {
   border-color: #060;
   color: #060;
   background: #CFC;
-}
-
-#sidebar {
-    width: 20%;
-    float: left;
-    /*border: solid 1px #ccc;*/
-}
-#sidebar ul {
-    list-style-type: none;
-    margin: 0;
-}
-
-.issue-lists {
-    width: 79%;
-    float: left;
-    /*border: solid 1px #ccc;*/
-}
-
-.issue-list {
-    width: 23%;
-    float: left;
-    margin-left: 1%;
-}
-.issue-list ul {
-    list-style: none;
-    padding:0;
-    margin:0;
-}
-.issue-list li {
-    font-size:12px;
-    padding:5px;
-    background:#ccc;
-    list-style:none;
-    margin:0;
-}
-.issue-list li:nth-child(even) {
-    background: #b2b2b2;
-}
-
-.modal-mask {
-  /* this will cover the full screen */
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  padding: 100px;
-  background-color: gray; /* fallback */
-  background-color: rgba(0,0,0,0.5);
-}
-.modal-body {
-  max-width: 700px;
-  margin: auto;
-  background-color: white;
-  padding: 25px 35px;
-}
-.modal-top-line {
-  position: relative;
-  font-size: 27px;
-  line-height: normal;
-}
-.modal-top-line .issue-number {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.modal-header .issue-title {
-  margin-top: 10px;
 }
