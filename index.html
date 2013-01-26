@@ -59,18 +59,18 @@
       </div>
     </script>
     <script id='js-repo-list-template' type='text/template'>
-        <% repos.each(function (repo) { %>
+      <% repos.each(function (repo) { %>
         <li> <%- repo.displayName() %>
           <a data-repo-id='<%= repo.id %>' class='js-repo-remove btn btn-danger btn-small'>Remove</a>
         </li>
-        <% }); %>
+      <% }); %>
     </script>
     <script id='js-repo-filter-list-template' type='text/template'>
       <% repos.each(function (repo) { %>
-      <label class="checkbox">
-        <input type="checkbox" name="repoFilter"  value='<%- repo.id %>' checked >
-        <%- repo.displayName() %>
-      </label>
+        <label class="checkbox">
+          <input type="checkbox" name="repoFilter"  value='<%- repo.id %>' checked >
+          <%- repo.displayName() %>
+        </label>
       <% }); %>
     </script>
     <script id='js-welcome-template' type='text/template'>
