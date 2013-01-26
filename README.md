@@ -3,7 +3,7 @@ Hubbub
 
 Issues get messy, Hubbub keeps you organized.
 
-[Demo](http://backstopmedia.github.com/backbone) • [Test Suite](http://backstopmedia.github.com/backbone/test)
+[Demo](http://backstopmedia.github.com/hubbub) • [Test Suite](http://backstopmedia.github.com/hubbub/test)
 
 API
 ---
