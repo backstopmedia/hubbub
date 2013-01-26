@@ -24,6 +24,11 @@
       'change input[name="repoFilter"]': 'filterRepos'
     },
 
+    initialize: function () {
+      // re-render sidebar when repos are added/removed
+      this.listenTo(app.board.repos, 'add remove', _.debounce(this.render));
+    },
+
     render: function(){
       this.$el.html(this.template({repos:this.collection}));
       // cache the filters
