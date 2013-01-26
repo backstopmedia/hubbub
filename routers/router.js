@@ -14,11 +14,13 @@
 
     issue: function(issueId){
       var issue = app.board.issues.get(issueId);
-      var modal = new app.IssueModalView({model: issue});
-      modal.render();
+      this.modal = new app.IssueModalView({model: issue});
+      this.modal.render();
     },
 
     manage: function(){
+      this.closeModal();
+
       // If there is an existing view, then remove it and clear any listeners
       if (this.currentView) this.currentView.remove();
       this.currentView = new app.MainView();
@@ -26,9 +28,17 @@
     },
 
     welcome: function(){
+      this.closeModal();
+
       if (this.currentView) this.currentView.remove();
       this.currentView = new app.WelcomeView();
       $('#app-container').append(this.currentView.render().el);
+    },
+
+    closeModal: function() {
+      if (this.modal) {
+        this.modal.remove();
+      }
     }
   });
 

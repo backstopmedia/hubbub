@@ -20,6 +20,7 @@
     render: function () {
       this.$el.html(_.template(tpl, {issue: this.model}));
       $('body').prepend(this.$el);
+      return this;
     },
 
     categoryChanged: function (ev) {
@@ -36,6 +37,9 @@
       this.remove();
       // todo: later change to navigate to ""
       app.router.navigate("manage");
+    },
+
+    initialize: function() {
     }
   });
 })();
