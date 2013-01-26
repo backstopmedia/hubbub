@@ -28,6 +28,10 @@ a {
   background: #FCC;
 }
 
+.form-search input {
+  width: 100%;
+}
+
 .js-success {
   border-color: #060;
   color: #060;
