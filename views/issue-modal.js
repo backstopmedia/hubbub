@@ -5,20 +5,19 @@
   var app = window.app;
   var _ = window._;
 
-  var tpl = $('#js-issue-modal-template').html();
-
-  app.IssueModalView = app.View.extend({
+  app.IssueModalView = app.ModalView.extend({
     className: 'issue-modal',
 
-    events: {
-      // you can use any jQuery selectors here
-      'change select[name="category"]': 'categoryChanged',
-      'click .modal-mask': 'removeAndBack',
-      'click .modal' : 'stopPropogation'
+    template: _.template($('#js-issue-modal-template').html()),
+
+    events: function(){
+      return _.extend({},app.ModalView.prototype.events,{
+        'change select[name="category"]': 'categoryChanged'
+      });
     },
 
     render: function () {
-      this.$el.html(_.template(tpl, {issue: this.model}));
+      this.$el.html(this.template({issue: this.model}));
       $('body').prepend(this.$el);
       return this;
     },
@@ -29,15 +28,6 @@
       this.removeAndBack();
     },
 
-    stopPropogation: function (ev){
-      ev.stopPropagation();
-    },
-
-    removeAndBack: function (){
-      this.remove();
-      // todo: later change to navigate to ""
-      app.router.navigate("manage");
-    },
 
     initialize: function() {
     }

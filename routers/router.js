@@ -7,8 +7,7 @@
 
   app.Router = Backbone.Router.extend({
      routes:{
-       "manage": "manage",
-       "": "welcome",
+       "": "manage",
        "issue/:id": "issue"
      },
 

@@ -24,7 +24,7 @@
     removeAndBack: function (){
       this.remove();
       // todo: later change to navigate to ""
-      app.router.navigate("manage");
+      app.router.navigate("");
     }
   });
 })();
