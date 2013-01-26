@@ -66,13 +66,10 @@
         </li>
       <% }); %>
     </script>
-    <script id='js-repo-filter-list-template' type='text/template'>
-      <% repos.each(function (repo) { %>
-        <label class="checkbox">
-          <input type="checkbox" name="repoFilter"  value='<%- repo.id %>' checked >
-          <%- repo.displayName() %>
-        </label>
-      <% }); %>
+    <script id='js-repo-filter-item-template' type='text/template'>
+      <input type='checkbox' checked><%- repo.displayName() %></label>
+      <i class='js-refresh icon-refresh'></i>
+      <i class='js-remove icon-remove'></i>
     </script>
     <script id='js-welcome-template' type='text/template'>
       <div class='span6'>
