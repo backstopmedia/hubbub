@@ -16,7 +16,7 @@
     },
 
     filterRepos: function(){
-      this.$('input').each(function(){
+      this.$('input[name="repoFilter"]').each(function(){
         var $input = $(this);
         var issues = app.board.repos.get($input.val()).issues.models;
         if ($input.is(':checked')){
