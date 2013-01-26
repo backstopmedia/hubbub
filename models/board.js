@@ -5,20 +5,41 @@
   var app = window.app;
 
   var Board = app.Board = app.Model.extend({
+    urlRoot: '/boards',
+
     initialize: function () {
       this.repos = new app.Repo.Collection();
       this.issues = new app.Issue.Collection();
+
       this.issues.listenTo(this.repos, 'add', function (repo) {
+        // when an Issue is added to the Repo, add it to the global Collection
         this.listenTo(repo.issues, 'add', function (issue) {
           this.add(issue);
         });
+        // when an Issue is added to the Repo, remove it from the global Collection
         this.listenTo(repo.issues, 'remove', function (issue) {
           this.remove(issue);
         });
       });
+      // when Repo is removed, stop listening to its events
       this.issues.listenTo(this.repos, 'remove', function (repo) {
         this.stopListening(repo.issues);
       });
+
+      // persist the Repos/Issues as soon as they're added/changed, or destroy them if they leave their respective Collections
+      this.listenTo(this.repos, 'add change', function (repo) {
+        repo.save();
+      } );
+      this.listenTo(this.repos, 'remove', function (repo) {
+        repo.destroy();
+      } );
+      this.listenTo(this.issues, 'add change', function (issue) {
+        issue.save();
+      } );
+      this.listenTo(this.issues, 'remove', function (issue) {
+        issue.destroy();
+      } );
+
       this.defaultIssues = new app.Issue.Collection();
       this.defaultIssues.setFilter(this.issues, "category", "default");
       this.doingIssues = new app.Issue.Collection();
@@ -47,7 +68,10 @@
       return attrs;
     },
 
-    urlRoot: '/boards'
+    // preferable to provide a getter function than to access private variables
+    getRepos: function () {
+      return this.repos;
+    }
   });
 
   Board.Collection = app.Model.Collection.extend({

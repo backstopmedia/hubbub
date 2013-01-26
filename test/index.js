@@ -68,4 +68,20 @@ window.jQuery(function () {
     });
     equal(repo.displayName(), 'backstopmedia/backbone');
   });
+
+  test('adding a repo to the board should persist the repo', function () {
+    // TODO simplify this test
+    var board = new app.Board();
+    var repos = board.getRepos();
+    var repo = new app.Repo({
+      name: 'backbone',
+      owner: {login: 'bob'}
+    });
+    repos.add(repo);
+
+    var newRepos = new app.Repo.Collection();
+    newRepos.owner = new app.User({login: 'bob'});
+    newRepos.fetch();
+    equal(newRepos.length, 1);
+  });
 });
