@@ -11,10 +11,24 @@
        "issue/:id": "issue"
      },
 
+    initialize: function(){
+      this.welcome();
+    },
+
     issue: function(issueId){
+      //If someone navigates directly to an issue we need to make sure the boards are loaded in the background
+      if(!this.currentView){
+        this.manage();
+      }
       var issue = app.board.issues.get(issueId);
       this.modal = new app.IssueModalView({model: issue});
       this.modal.render();
+    },
+
+    welcome: function(){
+      this.closeModal();
+      var modal = new app.WelcomeModalView();
+      modal.render();
     },
 
     manage: function(){
@@ -23,14 +37,6 @@
       // If there is an existing view, then remove it and clear any listeners
       if (this.currentView) this.currentView.remove();
       this.currentView = new app.MainView();
-      $('#app-container').append(this.currentView.render().el);
-    },
-
-    welcome: function(){
-      this.closeModal();
-
-      if (this.currentView) this.currentView.remove();
-      this.currentView = new app.WelcomeView();
       $('#app-container').append(this.currentView.render().el);
     },
 

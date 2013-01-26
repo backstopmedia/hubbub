@@ -58,6 +58,23 @@
         </div>
       </div>
     </script>
+    <script id='js-welcome-modal-template' type='text/template'>
+      <div class='modal-mask'>
+        <div class='modal'>
+          <div class='modal-header'>
+            <h3>Welcome To Hubbub</h3>
+          </div>
+          <div class='modal-body'>
+            <p>This example Backbone App allows you to prioritise and manage issues from several
+              Github repos on a Kanban style board.</p>
+            <p>Github data is read from the public api and your priorities are saved to local storage.</p>
+          </div>
+          <div class='modal-footer'>
+            <button class='btn exit'>Close</button>
+          </div>
+        </div>
+      </div>
+    </script>
     <script id='js-repo-list-template' type='text/template'>
       <% repos.each(function (repo) { %>
         <li>
@@ -126,6 +143,7 @@
     <script src='views/repo-list.js'></script>
     <script src='views/modal.js'></script>
     <script src='views/issue-modal.js'></script>
+    <script src='views/welcome-modal.js'></script>
     <script src='views/welcome.js'></script>
     <script src='routers/router.js'></script>
   </head>
