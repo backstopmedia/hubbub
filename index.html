@@ -27,11 +27,25 @@
     </script>
     <script id='js-issue-modal-template' type='text/template'>
       <div class='modal-mask'>
-        <div class='modal-body'>
-          <a href='<%- issue.get('html_url') %>'>
-            <%- issue.displayName() %>
-          </a><br>
-          <%= marked.parse(issue.get('body')) %>
+        <div class='modal'>
+          <div class='modal-header'>
+            <a href='<%- issue.get('html_url') %>'>
+              <div class='modal-top-line'>
+                <div class='issue-repo'>
+                  <%- issue.repo.displayName() %>
+                </div>
+                <div class='issue-number'>
+                  #<%= issue.get('number') %>
+                </div>
+              </div>
+              <div class='issue-title'>
+                <%- issue.get('title') %>
+              </div>
+            </a>
+          </div>
+          <div class='modal-body'>
+            <%= marked.parse(issue.get('body')) %>
+          </div>
         </div>
       </div>
     </script>

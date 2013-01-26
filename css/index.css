@@ -68,3 +68,16 @@ a {
   border: 1px solid black;
   padding: 25px 35px;
 }
+.modal-top-line {
+  position: relative;
+  font-size: 27px;
+  line-height: normal;
+}
+.modal-top-line .issue-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.modal-header .issue-title {
+  margin-top: 10px;
+}
