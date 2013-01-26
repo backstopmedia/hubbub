@@ -6,7 +6,6 @@
     <title>Hubbub - Backbone.js Example App from Backstop Media</title>
     <link href='css/bootstrap.css' rel='stylesheet' type='text/css'>
     <link href='css/index.css' rel='stylesheet' type='text/css'>
-    <!-- place templates above models so we don't need to wait for DOMReady to retrieve them -->
     <script id='js-search-results-template' type='text/template'>
       <h4>Found:</h4>
       <ul>
@@ -92,43 +91,14 @@
         <div id='js-message' class='alert empty'></div>
         <div class='well empty' id='js-repo-search-list'></div>
       </div>
-      <div class='repo-filter'>
-        <% repos.each(function (repo) { %>
-          <label class="checkbox">
-            <input type="checkbox" name="repoFilter"  value='<%- repo.id %>' checked >
-            <%- repo.displayName() %>
-          </label>
-        <% }); %>
-      </div>
+      <ul class='js-repo-filter'></ul>
     </script>
     <script id='js-repo-filter-item-template' type='text/template'>
       <input type='checkbox' checked><%- repo.displayName() %></label>
       <i class='js-refresh icon-refresh'></i>
       <i class='js-remove icon-remove'></i>
     </script>
-    <!-- TODO remove -->
-    <script id='js-welcome-template' type='text/template'>
-      <div class='span6'>
-        <p>This example Backbone App allows you to prioritise and manage issues from several
-          Github repos on a Kanban style board.</p>
-        <p>Github data is read from the public api and your priorities are saved to local storage.</p>
-        <p>Start by adding repos. Please enter either a username or a username/repo below:</p>
-        <form class='form-search'>
-          <input type='text' placeholder='documentcloud/backbone' id='js-add-input' />
-          <button id='js-add-button' class='btn'>Find</button>
-        </form>
-        <div id='js-message' class='alert'></div>
-        <div class='well' id='js-repo-search-list'>
-      </div>
-      </div>
-      <div class='span6'>
-        <div class='well' id='js-your-repo-list'>
-          <h4>Your Repos</h4>
-        </div>
-        <p>After adding repos, click next to start managing the issues.</p>
-        <a href='#manage' class='btn btn-large btn-primary'>Next</a>
-      </div>
-    </script>
+
 
     <script src='vendor/marked.js'></script>
     <script src='vendor/jquery.js'></script>
@@ -149,7 +119,6 @@
     <script src='views/modal.js'></script>
     <script src='views/issue-modal.js'></script>
     <script src='views/welcome-modal.js'></script>
-    <script src='views/welcome.js'></script>
     <script src='routers/router.js'></script>
   </head>
 
