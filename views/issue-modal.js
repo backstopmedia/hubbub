@@ -13,7 +13,8 @@
     events: {
       // you can use any jQuery selectors here
       'change select[name="category"]': 'categoryChanged',
-      'click .modal-mask': 'remove'
+      'click .modal-mask': 'remove',
+      'click .modal' : 'stopPropogation'
     },
 
     render: function () {
@@ -25,6 +26,10 @@
       var category = $(ev.target).val();
       this.model.set('category', category);
       this.remove();
+    },
+
+    stopPropogation: function (ev){
+      ev.stopPropogation();
     }
   });
 })();
