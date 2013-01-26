@@ -13,7 +13,7 @@
     events: {
       // you can use any jQuery selectors here
       'change select[name="category"]': 'categoryChanged',
-      'click .modal-mask': 'remove',
+      'click .modal-mask': 'removeAndBack',
       'click .modal' : 'stopPropogation'
     },
 
@@ -25,11 +25,17 @@
     categoryChanged: function (ev) {
       var category = $(ev.target).val();
       this.model.set('category', category);
-      this.remove();
+      this.removeAndBack();
     },
 
     stopPropogation: function (ev){
       ev.stopPropagation();
+    },
+
+    removeAndBack: function (){
+      this.remove();
+      // todo: later change to navigate to ""
+      app.router.navigate("manage");
     }
   });
 })();

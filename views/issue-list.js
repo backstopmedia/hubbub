@@ -16,17 +16,6 @@
       this.listenTo(this.collection, 'add remove', _.debounce(this.render, 0));
     },
 
-    events: {
-      "click li": "editIssue"
-    },
-
-    editIssue: function(ev) {
-      var issueId = $(ev.target).attr('data-issue-id');
-      var issue = this.collection.get(issueId);
-      var modal = new app.IssueModalView({model: issue});
-      modal.render();
-    },
-
     render: function () {
       this.$el.html(this.template({
         title: this.options.title,

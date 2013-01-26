@@ -8,8 +8,15 @@
   app.Router = Backbone.Router.extend({
      routes:{
        "manage": "manage",
-       "": "welcome"
+       "": "welcome",
+       "issue/:id": "issue"
      },
+
+    issue: function(issueId){
+      var issue = app.board.issues.get(issueId);
+      var modal = new app.IssueModalView({model: issue});
+      modal.render();
+    },
 
     manage: function(){
       // If there is an existing view, then remove it and clear any listeners
