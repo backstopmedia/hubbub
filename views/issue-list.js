@@ -16,6 +16,14 @@
       this.listenTo(this.collection, 'add remove', _.debounce(this.render, 0));
     },
 
+    addItem: function(model) {
+
+    },
+
+    removeItem: function(model) {
+
+    },
+
     render: function () {
       this.$el.html(this.template({
         title: this.options.title,
