@@ -11,7 +11,13 @@
        "issue/:id": "issue"
      },
 
+    initialize: function() {
+      var welcome = new app.WelcomeModalView();
+      welcome.render();
+    },
+
     issue: function(issueId){
+      if (!this.currentView) this.manage();
       var issue = app.board.issues.get(issueId);
       this.modal = new app.IssueModalView({model: issue});
       this.modal.render();
@@ -26,13 +32,6 @@
       $('#app-container').append(this.currentView.render().el);
     },
 
-    welcome: function(){
-      this.closeModal();
-
-      if (this.currentView) this.currentView.remove();
-      this.currentView = new app.WelcomeView();
-      $('#app-container').append(this.currentView.render().el);
-    },
 
     closeModal: function() {
       if (this.modal) {
