@@ -13,7 +13,7 @@
     },
 
     urlRoot: function () {
-      return this.repo.url() + '/issues';
+      return this.repo.url() + '/issues?per_page=100';
     },
 
     displayName: function () {
@@ -39,7 +39,7 @@
     model: Issue,
 
     url: function () {
-      return this.repo.url() + '/issues';
+      return this.repo.url() + '/issues?per_page=100';
     },
 
     setFilter: function(parent, testKey, testValue) {
