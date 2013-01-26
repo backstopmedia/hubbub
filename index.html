@@ -21,7 +21,7 @@
       <h4><%= title %></h4>
       <ul>
         <% issues.each(function (issue) { %>
-        <li data-issue-id='<%- issue.id %>'><%- issue.displayName() %></li>
+          <li data-issue-id='<%- issue.id %>'><%- issue.displayName() %></li>
         <% }); %>
       </ul>
     </script>
@@ -59,18 +59,19 @@
       </div>
     </script>
     <script id='js-repo-list-template' type='text/template'>
-        <% repos.each(function (repo) { %>
-        <li> <%- repo.displayName() %>
+      <% repos.each(function (repo) { %>
+        <li>
+          <%- repo.displayName() %>
           <a data-repo-id='<%= repo.id %>' class='js-repo-remove btn btn-danger btn-small'>Remove</a>
         </li>
-        <% }); %>
+      <% }); %>
     </script>
     <script id='js-repo-filter-list-template' type='text/template'>
       <% repos.each(function (repo) { %>
-      <label class="checkbox">
-        <input type="checkbox" name="repoFilter"  value='<%- repo.id %>' checked >
-        <%- repo.displayName() %>
-      </label>
+        <label class="checkbox">
+          <input type="checkbox" name="repoFilter"  value='<%- repo.id %>' checked >
+          <%- repo.displayName() %>
+        </label>
       <% }); %>
     </script>
     <script id='js-welcome-template' type='text/template'>
