@@ -29,7 +29,7 @@
     },
 
     stopPropogation: function (ev){
-      ev.stopPropogation();
+      ev.stopPropagation();
     }
   });
 })();

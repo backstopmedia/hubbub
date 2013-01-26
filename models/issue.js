@@ -49,7 +49,9 @@
           self.add(model);
         }
       });
-      parent.on('remove', this.remove);
+      parent.on('remove', function(model){
+        self.remove(model);
+      });
       parent.on('change:' + testKey, function(model, value){
         if(value === testValue){
           if(!self.get(model)) self.add(model);
