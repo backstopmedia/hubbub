@@ -4,8 +4,8 @@
 
   <head>
     <title>Hubbub - Backbone.js Example App from Backstop Media</title>
-    <link href='css/bootstrap.css' rel='stylesheet' type='text/css'>
     <link href='css/index.css' rel='stylesheet' type='text/css'>
+
     <script id='js-search-results-template' type='text/template'>
       <h4>Found:</h4>
       <ul>
@@ -16,6 +16,7 @@
         <% }); %>
       </ul>
     </script>
+
     <script id='js-issue-list-template' type='text/template'>
       <h4><%= title %></h4>
       <ul>
@@ -24,6 +25,7 @@
         <% }); %>
       </ul>
     </script>
+
     <!-- piggyback off Bootstrap Modal styles -->
     <script id='js-issue-modal-template' type='text/template'>
       <div class='modal-mask'>
@@ -57,6 +59,7 @@
         </div>
       </div>
     </script>
+
     <script id='js-welcome-modal-template' type='text/template'>
       <div class='modal-mask'>
         <div class='modal'>
@@ -64,9 +67,9 @@
             <h3>Welcome To Hubbub</h3>
           </div>
           <div class='modal-body'>
-            <p>This example Backbone App allows you to prioritise and manage issues from several
-              Github repos on a Kanban style board.</p>
-            <p>Github data is read from the public api and your priorities are saved to local storage.</p>
+            <p>This example Backbone App allows you to prioritize and manage issues from several
+              GitHub repos on a Kanban style board.</p>
+            <p>GitHub data is read from the public API and your priorities are saved to local storage.</p>
           </div>
           <div class='modal-footer'>
             <button class='btn exit'>Close</button>
@@ -74,6 +77,7 @@
         </div>
       </div>
     </script>
+
     <script id='js-repo-list-template' type='text/template'>
       <% repos.each(function (repo) { %>
         <li>
@@ -82,6 +86,7 @@
         </li>
       <% }); %>
     </script>
+
     <script id='js-sidebar-template' type='text/template'>
       <div class='repo-search'>
         <form class='form-search'>
@@ -93,6 +98,7 @@
       </div>
       <ul class='js-repo-filter'></ul>
     </script>
+
     <script id='js-repo-filter-item-template' type='text/template'>
       <input type='checkbox' checked><%- repo.displayName() %></label>
       <i class='js-refresh icon-refresh'></i>
@@ -125,9 +131,9 @@
   </head>
 
   <body>
-  <div class="container-fluid" id="app-container">
-    <h2>Hubbub</h2>
-  </div>
+    <div class="container-fluid" id="app-container">
+      <h2>Hubbub</h2>
+    </div>
   </body>
 
 </html>

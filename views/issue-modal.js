@@ -10,16 +10,21 @@
 
     template: _.template($('#js-issue-modal-template').html()),
 
-    events: function(){
-      return _.extend({},app.ModalView.prototype.events,{
-        'change select[name="category"]': 'categoryChanged'
-      });
-    },
+    events: _.extend({}, app.ModalView.prototype.events, {
+      'change select[name="category"]': 'categoryChanged',
+      'keydown': 'escRemove'
+    }),
 
     render: function () {
       this.$el.html(this.template({issue: this.model}));
       $('body').prepend(this.$el);
       return this;
+    },
+
+    escRemove: function(ev) {
+      if (ev.which === 27) {
+        this.remove();
+      }
     },
 
     categoryChanged: function (ev) {

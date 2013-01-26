@@ -17,12 +17,12 @@
       }
     },
 
-    routes:{
+    routes: {
       '': 'manage',
       'issue/:id': 'issue'
     },
 
-    manage: function(){
+    manage: function() {
       this.resetState();
 
       // If there is an existing view, then remove it and clear any listeners
@@ -30,7 +30,9 @@
       $('#app-container').append(this.currentView.render().el);
     },
 
-    issue: function(issueId){
+    issue: function(issueId) {
+      // FIXME Is this needed here? The following line would always be true, if
+      // that is the case.
       //this.resetState();
 
       if (!this.currentView) this.manage();
