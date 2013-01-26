@@ -1,10 +1,10 @@
-(function(window) {
+(function (window) {
   'use strict';
 
   var app = window.app;
 
   app.Router = Backbone.Router.extend({
-    initialize: function() {
+    initialize: function () {
       var welcome = new app.WelcomeModalView();
 
       // We don't want to show the welcome modal every single time you visit,
@@ -22,7 +22,7 @@
       'issue/:id': 'issue'
     },
 
-    manage: function() {
+    manage: function () {
       this.resetState();
 
       // If there is an existing view, then remove it and clear any listeners
@@ -30,7 +30,7 @@
       $('#app-container').append(this.currentView.render().el);
     },
 
-    issue: function(issueId) {
+    issue: function (issueId) {
       // FIXME Is this needed here? The following line would always be true, if
       // that is the case.
       //this.resetState();
@@ -41,7 +41,7 @@
       this.modal.render();
     },
 
-    resetState: function() {
+    resetState: function () {
       if (this.modal) {
         this.modal.remove();
         delete this.modal;

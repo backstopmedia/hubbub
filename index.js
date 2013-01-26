@@ -12,7 +12,7 @@
 
     // Set up initial view, load initial data, etc...
     init: function () {
-      app.board = new app.Board({id: 1});
+      app.board = new app.Board.Model({id: 1});
 
       // retrieve previously saved data from localhost
       app.board.fetch();

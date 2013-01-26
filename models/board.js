@@ -1,10 +1,11 @@
-(function () {
+(function (window) {
   'use strict';
 
-  var _ = window._;
   var app = window.app;
 
-  var Board = app.Board = app.Model.extend({
+  var Board = app.Board = {};
+  
+  Board.Model = Backbone.Model.extend({
     urlRoot: '/boards',
 
     initialize: function () {
@@ -47,14 +48,20 @@
       });
 
       this.filteredIssues = new app.Issue.Collection();
-      this.filteredIssues.listenTo(this.issues, "add", this.filteredIssues.add);
-      this.filteredIssues.listenTo(this.issues, "remove", this.filteredIssues.remove);
+      this.filteredIssues.listenTo(this.issues, {
+        add: this.filteredIssues.add,
+        remove: this.filteredIssues.remove
+      });
+
       this.defaultIssues = new app.Issue.Collection();
       this.defaultIssues.setFilter(this.filteredIssues, "category", "default");
+
       this.doingIssues = new app.Issue.Collection();
       this.doingIssues.setFilter(this.filteredIssues, "category", "doing");
+
       this.todoIssues = new app.Issue.Collection();
       this.todoIssues.setFilter(this.filteredIssues, "category", "todo");
+
       this.doneIssues = new app.Issue.Collection();
       this.doneIssues.setFilter(this.filteredIssues, "category", "done");
     },
@@ -83,9 +90,9 @@
     }
   });
 
-  Board.Collection = app.Model.Collection.extend({
+  Board.Collection = Backbone.Collection.extend({
     model: Board,
 
     url: '/boards'
   });
-})();
+})(this);
