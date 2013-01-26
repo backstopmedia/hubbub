@@ -16,6 +16,7 @@
 
     applyFilter: function () {
       var checked = this.$('input').is(':checked');
+      console.log(this.model.issues);
       app.board.filteredIssues[checked ? 'add' : 'remove'](this.model.issues);
     },
 

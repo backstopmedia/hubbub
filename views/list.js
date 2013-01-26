@@ -2,6 +2,7 @@
   'use strict';
 
   var $ = window.jQuery;
+  var _ = window._;
   var app = window.app;
 
   app.ListView = app.View.extend({
@@ -12,10 +13,11 @@
         sort: this.sortModels,
         remove: this.removeModel
       });
+      this.collection.each(_.bind(this.addModel, this));
     },
 
     addModel: function (model) {
-      this.$el.append((this.views[model.cid] = new this.options.ModelView({
+      this.$el.append((this.views[model.cid] = new this.options.modelView({
         collection: this.collection,
         model: model
       })).render().el);

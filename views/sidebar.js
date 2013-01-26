@@ -18,10 +18,7 @@
       // repo searching
       'click #js-add-button': 'search',
       'keydown #js-add-input': 'search',
-      'click .js-repo-result': 'searchResultClicked',
-
-      // fitlering
-      'change input[name="repoFilter"]': 'filterRepos'
+      'click .js-repo-result': 'searchResultClicked'
     },
 
     initialize: function () {
@@ -29,10 +26,13 @@
       this.listenTo(app.board.repos, 'add remove', _.debounce(this.render));
     },
 
-    render: function(){
-      this.$el.html(this.template({repos:this.collection}));
-      // cache the filters
-      this.$repoFilters = this.$('input[name="repoFilter"]');
+    render: function () {
+      this.$el.html(this.template({repos: this.collection}));
+      this.repoFilterView = new app.ListView({
+        el: this.$('.js-repo-filter'),
+        collection: app.board.repos,
+        modelView: app.RepoFilterItemView
+      });
       return this;
     },
 
@@ -81,18 +81,6 @@
             .html(resultsTemplate({repos: repos}));
         },
         error: _.bind(this.syncError, this)
-      });
-    },
-
-    filterRepos: function(){
-      this.$repoFilters.each(function(){
-        var $input = $(this);
-        var issues = app.board.repos.get($input.val()).issues.models;
-        if ($input.is(':checked')){
-          app.board.filteredIssues.add(issues);
-        } else {
-          app.board.filteredIssues.remove(issues);
-        }
       });
     },
 
