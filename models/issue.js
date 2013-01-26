@@ -42,21 +42,23 @@
       return this.repo.url() + '/issues';
     },
 
-    setFilter: function(parent, testKey, testValue){
+    setFilter: function(parent, testKey, testValue) {
       var self = this;
-      parent.on('add', function(model){
-        if (model.get(testKey) === testValue){
-          self.add(model);
+      this.listenTo(parent, {
+        add: function(model) {
+          if (model.get(testKey) === testValue) {
+            self.add(model);
+          }
+        },
+        remove: function(model) {
+          self.remove(model);
         }
       });
-      parent.on('remove', function(model){
-        self.remove(model);
-      });
-      parent.on('change:' + testKey, function(model, value){
+      this.listenTo(parent, 'change:' + testKey, function(model, value) {
         if(value === testValue){
-          if(!self.get(model)) self.add(model);
+          if (!self.get(model)) self.add(model);
         } else {
-          if(self.get(model)) self.remove(model);
+          if (self.get(model)) self.remove(model);
         }
       });
     }
