@@ -19,11 +19,10 @@
 
     <script id='js-issue-list-template' type='text/template'>
       <h4><%= title %></h4>
-      <ul>
-        <% issues.each(function (issue) { %>
-          <li><a href='#issue/<%- issue.id %>'><%- issue.displayName() %></a></li>
-        <% }); %>
-      </ul>
+      <ul></ul>
+    </script>
+    <script id='js-issue-item-template' type='text/template'>
+      <a href='#issue/<%- issue.id %>'><%- issue.displayName() %></a>
     </script>
 
     <!-- piggyback off Bootstrap Modal styles -->
@@ -130,6 +129,9 @@
     <script src='views/view.js'></script>
     <script src='views/main.js'></script>
     <script src='views/sidebar.js'></script>
+    <script src='views/list.js'></script>
+    <script src='views/item.js'></script>
+    <script src='views/issue-holder.js'></script>
     <script src='views/issue-list.js'></script>
     <script src='views/repo-list.js'></script>
     <script src='views/modal.js'></script>

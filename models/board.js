@@ -53,17 +53,6 @@
         remove: this.filteredIssues.remove
       });
 
-      this.defaultIssues = new app.Issue.Collection();
-      this.defaultIssues.setFilter(this.filteredIssues, "category", "default");
-
-      this.doingIssues = new app.Issue.Collection();
-      this.doingIssues.setFilter(this.filteredIssues, "category", "doing");
-
-      this.todoIssues = new app.Issue.Collection();
-      this.todoIssues.setFilter(this.filteredIssues, "category", "todo");
-
-      this.doneIssues = new app.Issue.Collection();
-      this.doneIssues.setFilter(this.filteredIssues, "category", "done");
     },
 
     parse: function (res) {

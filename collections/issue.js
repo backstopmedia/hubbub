@@ -38,6 +38,9 @@
           if (self.get(model)) self.remove(model);
         }
       });
+      parent.each(function(model) {
+        parent.trigger("add",model);
+      });
     }
   });
 })(this);

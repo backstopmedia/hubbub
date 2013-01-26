@@ -39,6 +39,7 @@
     },
 
     removeModel: function (model) {
+      this.views[model.cid].remove();
       delete this.views[model.cid];
     }
   });

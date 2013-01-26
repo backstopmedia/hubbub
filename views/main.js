@@ -11,10 +11,10 @@
 
     render: function () {
       this.sideBarView = new app.SidebarView({collection:app.board.repos});
-      this.defaultIssuesView = new app.IssueListView({collection:app.board.defaultIssues, title:"Uncategorized"});
-      this.todoIssuesView = new app.IssueListView({collection:app.board.todoIssues, title:"To Do"});
-      this.doingIssuesView = new app.IssueListView({collection:app.board.doingIssues, title:"Doing"});
-      this.doneIssuesView = new app.IssueListView({collection:app.board.doneIssues, title:"Done"});
+      this.defaultIssuesView = new app.IssueHolderView({testKey:"category", testValue:"default", title:"Uncategorized"});
+      this.todoIssuesView = new app.IssueHolderView({testKey:"category", testValue:"todo", title:"To Do"});
+      this.doingIssuesView = new app.IssueHolderView({testKey:"category", testValue:"doing", title:"Doing"});
+      this.doneIssuesView = new app.IssueHolderView({testKey:"category", testValue:"done", title:"Done"});
 
       this.$el.append(
         this.sideBarView.render().el,
