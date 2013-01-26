@@ -6,7 +6,7 @@
   var app = window.app;
 
   app.SidebarView = app.View.extend({
-    template: _.template($('#js-repo-filter-list-template').html()),
+    template: _.template($('#js-sidebar-template').html()),
 
     className:"span2",
     id: "js-sidebar",
@@ -31,7 +31,5 @@
       this.$el.html(this.template({repos:this.collection}));
       return this;
     }
-
-
   });
 })();
