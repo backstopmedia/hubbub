@@ -7,14 +7,6 @@
     <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
     <link href='index.css' rel='stylesheet' type='text/css'>
     <!-- place templates above models so we don't need to wait for DOMReady to retrieve them -->
-    <script id='js-main-view-template' type='text/template'>
-      <div id='js-sidebar'>
-        <input id='js-add-input'><button id='js-add-button'>Add</button>
-        <div id='js-message' class='box'>
-          Please enter a user or user/repo combo.
-        </div>
-      </div>
-    </script>
     <script id='js-search-results-template' type='text/template'>
       <h4>Found:</h4>
       <ul>
@@ -67,6 +59,14 @@
         <a href='#manage' class='btn btn-large btn-primary'>Next</a>
       </div>
     </script>
+
+    <script id='js-manage-template' type='text/template'>
+      <div class="span2" id=''></div>
+
+
+
+    </script>
+
     <script src='vendor/json2.js'></script>
     <script src='vendor/jquery.js'></script>
     <script src='vendor/marked.js'></script>

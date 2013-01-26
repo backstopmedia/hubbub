@@ -116,8 +116,8 @@
     render: function () {
       this.$el.html(this.template());
 
-      var yourRepoView = new app.RepoListView({collection:app.board.repos});
-      this.$('#js-your-repo-list').append(yourRepoView.render().el);
+      this.yourRepoView = new app.RepoListView({collection:app.board.repos});
+      this.$('#js-your-repo-list').append(this.yourRepoView.render().el);
 
       // setup child views
       //var sidebarView = new app.SidebarView();
@@ -133,6 +133,11 @@
 
     syncError: function (__, xhr) {
       this.message(xhr.status + ' ' + xhr.data.message, 'error');
+    },
+
+    dispose: function() {
+      this.yourRepoView.remove();
+      this.remove();
     }
   });
 })();

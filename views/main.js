@@ -7,10 +7,25 @@
 
   app.MainView = app.View.extend({
 
+    initialize: function(){
+
+
+
+
+    },
+
+    handleIssueChange: function(issue){
+
+
+    },
+
     className:"row-fluid",
 
     render: function () {
       this.$el.html(this.template());
+
+      this.sideBarView = new app.SidebarView();
+
 
       // setup child views
       var sidebarView = new app.SidebarView();
