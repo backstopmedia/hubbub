@@ -76,7 +76,9 @@
           // TODO use events on this collection for rendering
           self.repos = repos;
           self.message("Succesfully Retrieved Repos", 'success');
-          self.$('#js-repo-search-list').html(resultsTemplate({repos: repos}));
+          self.$('#js-repo-search-list')
+            .removeClass('empty')
+            .html(resultsTemplate({repos: repos}));
         },
         error: _.bind(this.syncError, this)
       });
@@ -98,6 +100,7 @@
       var $box = this.$('#js-message').removeClass('alert-error alert-success');
       if (type) $box.addClass('alert-' + type);
       $box.html(message);
+      $box.removeClass('empty');
     },
 
     addRepo: function (repo) {
