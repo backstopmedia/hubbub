@@ -111,7 +111,7 @@
               self.message('Added: ' + repo.displayName(), 'success');
             },
             error: function (__, xhr) {
-              app.board.repos.remove(repo);
+              repo.destroy();
               self.syncError(__, xhr);
             }
           });
