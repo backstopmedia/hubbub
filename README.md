@@ -1,9 +1,9 @@
-Backstop Media - Backbone.js
-============================
+Hubbub
+======
 
-[View Demo Page](http://backstopmedia.github.com/backbone)
+Issues get messy, Hubbub keeps you organized.
 
-[View Test Suite](http://backstopmedia.github.com/backbone/test)
+[Demo](http://backstopmedia.github.com/backbone) • [Test Suite](http://backstopmedia.github.com/backbone/test)
 
 API
 ---
