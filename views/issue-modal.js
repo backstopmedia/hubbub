@@ -11,12 +11,20 @@
     className: 'issue-modal',
 
     events: {
-      "click .modal-mask": "remove"
+      // you can use any jQuery selectors here
+      'change select[name="status"]': 'statusChanged',
+      'click .modal-mask': 'remove'
     },
 
     render: function () {
       this.$el.html(_.template(tpl, {issue: this.model}));
       $('body').prepend(this.$el);
+    },
+
+    statusChanged: function (ev) {
+      var category = $(ev.target).val();
+      this.model.set('category', category);
+      this.remove();
     }
   });
 })();

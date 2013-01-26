@@ -25,6 +25,7 @@
         <% }); %>
       </ul>
     </script>
+    <!-- piggyback off Bootstrap Modal styles -->
     <script id='js-issue-modal-template' type='text/template'>
       <div class='modal-mask'>
         <div class='modal'>
@@ -45,6 +46,13 @@
           </div>
           <div class='modal-body'>
             <%= marked.parse(issue.get('body')) %>
+          </div>
+          <div class='modal-footer'>
+            <select name='status'>
+              <option value='todo'>To Do</option>
+              <option value='doing'>Doing</option>
+              <option value='done'>Done</option>
+            </select>
           </div>
         </div>
       </div>
