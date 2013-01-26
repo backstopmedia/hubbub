@@ -47,5 +47,24 @@ a {
 }
 .js-issue-list li:nth-child(even) {
     background: #b2b2b2;
+}
 
+.modal-mask {
+  /* this will cover the full screen */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding: 100px;
+  background-color: gray; /* fallback */
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-body {
+  max-width: 700px;
+  margin: auto;
+  background-color: white;
+  border: 1px solid black;
+  padding: 25px 35px;
 }

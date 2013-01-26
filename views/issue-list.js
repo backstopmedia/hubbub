@@ -11,8 +11,9 @@
     template: _.template($('#js-issue-list-template').html()),
 
     initialize: function () {
+      // debounce, in case multiple issues are being added/removed at once
       // TODO make more efficient?
-      this.listenTo(this.collection, 'add remove', _.debounce(this.render));
+      this.listenTo(this.collection, 'add remove', _.debounce(this.render, 0));
     },
 
     events: {
@@ -21,10 +22,9 @@
 
     editIssue: function(ev) {
       var issueId = $(ev.target).attr('data-issue-id');
-      var category = window.prompt("Please enter category (todo,doing,done):");
-      if(category){
-        this.collection.get(issueId).save({category:category});
-      }
+      var issue = this.collection.get(issueId);
+      var modal = new app.IssueModalView({model: issue});
+      modal.render();
     },
 
     render: function () {

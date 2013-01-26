@@ -17,19 +17,6 @@
         <% }); %>
       </ul>
     </script>
-    <script id='js-issue-list-full-template' type='text/template'>
-      <h2><%= title %></h2>
-      <ul>
-        <% issues.each(function (issue) { %>
-          <li>
-            <a href='<%- issue.get('html_url') %>'>
-              <%- issue.displayName() %>
-            </a><br>
-            <%= marked.parse(issue.get('body')) %>
-          </li>
-        <% }); %>
-      </ul>
-    </script>
     <script id='js-issue-list-template' type='text/template'>
       <h4><%= title %></h4>
       <ul>
@@ -37,6 +24,16 @@
         <li data-issue-id='<%- issue.id %>'><%- issue.displayName() %></li>
         <% }); %>
       </ul>
+    </script>
+    <script id='js-issue-modal-template' type='text/template'>
+      <div class='modal-mask'>
+        <div class='modal-body'>
+          <a href='<%- issue.get('html_url') %>'>
+            <%- issue.displayName() %>
+          </a><br>
+          <%= marked.parse(issue.get('body')) %>
+        </div>
+      </div>
     </script>
     <script id='js-repo-list-template' type='text/template'>
         <% repos.each(function (repo) { %>
@@ -88,7 +85,7 @@
     <script src='views/sidebar.js'></script>
     <script src='views/issue-list.js'></script>
     <script src='views/repo-list.js'></script>
-    <script src='views/issue.js'></script>
+    <script src='views/issue-modal.js'></script>
     <script src='views/welcome.js'></script>
     <script src='routers/router.js'></script>
   </head>
