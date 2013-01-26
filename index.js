@@ -2,6 +2,7 @@
   'use strict';
 
   var $ = window.jQuery;
+  var Backbone = window.Backbone;
 
   // Define the global namespace for the app.
   var app = window.app = {
@@ -12,12 +13,13 @@
     // Set up initial view, load initial data, etc...
     init: function () {
       app.board = new app.Board({id: 1});
-      var mainView = new app.MainView();
-      mainView.render();
 
       // retrieve previously saved data from localhost
       app.board.fetch();
-      $('body').append(mainView.$el);
+
+      app.router = new app.Router();
+      Backbone.history.start();
+
     }
   };
 

@@ -6,7 +6,7 @@
   var app = window.app;
 
   app.IssueListView = app.View.extend({
-    className: 'js-issue-list',
+    className: 'js-issue-list span10',
 
     template: _.template($('#js-issue-list-template').html()),
 

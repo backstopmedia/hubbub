@@ -6,14 +6,16 @@
   var app = window.app;
 
   app.MainView = app.View.extend({
-    template: _.template($('#js-main-view-template').html()),
+
+    className:"row-fluid",
 
     render: function () {
       this.$el.html(this.template());
 
       // setup child views
-      var sidebarView = new app.SidebarView({el: this.$('#js-sidebar')});
+      var sidebarView = new app.SidebarView();
       sidebarView.render();
+      this.$el.append(sidebarView.$el);
 
       // TODO split into categories
       var issuesView = new app.IssueListView({collection: app.board.issues});
