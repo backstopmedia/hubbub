@@ -46,9 +46,13 @@
       // Grab the serialized data from the model.
       res = model.toJSON(options);
 
-      // In the CREATE case, we need to give the model a unique `id` and update
-      // the `endPoint`.
-      if (method === 'create') res.id = _.uniqueId();
+      // In the CREATE case, we need to give the model a unique `id`.
+      if (method === 'create') {
+        var next = 1;
+        // Iterate over the existing `id`s and find the next available one.
+        for (var id in models) if (next < +id) next = +id + 1;
+        res.id = next;
+      }
 
       // Save the model to `localStorage`
       models[res.id] = res;
