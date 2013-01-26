@@ -1,6 +1,7 @@
 (function (window) {
   'use strict';
 
+  var _ = window._;
   var app = window.app;
 
   var Board = app.Board = app.Board || {};
@@ -17,22 +18,18 @@
 
           // When an Issue is added to the Repo, add it to the global
           // Collection.
-          this.listenTo(repo.issues, 'add', function (issue) {
-            this.add(issue);
-          });
+          this.listenTo(repo.issues, 'add', this.add);
 
           // When an Issue is added to the Repo, remove it from the global
           // Collection.
-          this.listenTo(repo.issues, 'remove', function (issue) {
-            this.remove(issue);
-          });
+          this.listenTo(repo.issues, 'remove', this.remove);
         },
 
         // When Repo is removed, stop listening to its events and remove all of
         // that repo's issues.
         remove: function (repo) {
           this.stopListening(repo.issues);
-          repo.issues.invoke('destroy');
+          _.invoke(repo.issues.models.slice(), 'destroy');
         }
       });
 
