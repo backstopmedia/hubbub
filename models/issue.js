@@ -1,9 +1,11 @@
-(function () {
+(function (window) {
   'use strict';
 
   var app = window.app;
 
-  var Issue = app.Issue = app.Model.extend({
+  var Issue = app.Issue = {};
+
+  Issue.Model = Backbone.Model.extend({
     initialize: function () {
       this.repo = this.collection.repo;
     },
@@ -24,7 +26,7 @@
     },
 
     defaults: {
-      category:"default"
+      category: "default"
     }
   });
 
@@ -63,5 +65,4 @@
       });
     }
   });
-
-})();
+})(this);
