@@ -6,7 +6,15 @@
   app.Router = Backbone.Router.extend({
     initialize: function() {
       var welcome = new app.WelcomeModalView();
-      welcome.render();
+
+      // We don't want to show the welcome modal every single time you visit,
+      // so we store a "visited" state in the `window.name` property which
+      // persists during a session.
+      if (window.name !== "visited") {
+        welcome.render();
+
+        window.name = "visited";
+      }
     },
 
     routes:{
