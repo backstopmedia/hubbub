@@ -1,44 +1,49 @@
-(function () {
+(function(window) {
   'use strict';
 
-  var $ = window.jQuery;
-  var Backbone = window.Backbone;
   var app = window.app;
 
   app.Router = Backbone.Router.extend({
-     routes:{
-       "": "manage",
-       "issue/:id": "issue"
-     },
+    routes:{
+      '': 'manage',
+      'issue/:id': 'issue'
+    },
 
-    issue: function(issueId){
-      var issue = app.board.issues.get(issueId);
-      this.modal = new app.IssueModalView({model: issue});
-      this.modal.render();
+    issue: function(issueId) {
+      this.resetState();
+
+      // When clicking on an issue, display a popup modal.
+      this.modal = new app.IssueModalView({
+        // We need to fetch the correct issue from the issues board and assign
+        // to the modal property for this View to render.
+        model: app.board.issues.get(issueId)
+      }).render();
     },
 
     manage: function(){
-      this.closeModal();
+      this.resetState();
 
       // If there is an existing view, then remove it and clear any listeners
-      if (this.currentView) this.currentView.remove();
       this.currentView = new app.MainView();
       $('#app-container').append(this.currentView.render().el);
     },
 
     welcome: function(){
-      this.closeModal();
+      this.resetState();
 
-      if (this.currentView) this.currentView.remove();
       this.currentView = new app.WelcomeView();
       $('#app-container').append(this.currentView.render().el);
     },
 
-    closeModal: function() {
+    resetState: function() {
       if (this.modal) {
         this.modal.remove();
+      }
+
+      if (this.currentView) {
+        this.currentView.remove();
       }
     }
   });
 
-})();
+})(this);
