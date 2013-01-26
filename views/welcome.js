@@ -73,9 +73,7 @@
           repo.issues.fetch({
             update: true,
             remote: true,
-            success: function (issues) {
-              issues.invoke('save');
-              repo.save();
+            success: function () {
               app.board.save();
               self.message('Added: ' + repo.displayName(), 'success');
             },
