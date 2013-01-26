@@ -7,35 +7,34 @@
 
   app.MainView = app.View.extend({
 
-    initialize: function(){
-
-
-
-
-    },
-
-    handleIssueChange: function(issue){
-
-
-    },
-
     className:"row-fluid",
 
     render: function () {
-      this.$el.html(this.template());
 
-      this.sideBarView = new app.SidebarView();
+      this.sideBarView = new app.SidebarView({collection:app.board.repos});
+      this.defaultIssuesView = new app.IssueListView({collection:app.board.defaultIssues, title:"Uncateogorized"});
+      this.todoIssuesView = new app.IssueListView({collection:app.board.todoIssues, title:"ToDo"});
+      this.doingIssuesView = new app.IssueListView({collection:app.board.doingIssues, title:"Doing"});
+      this.doneIssuesView = new app.IssueListView({collection:app.board.doneIssues, title:"Done"});
 
+      this.$el.append([
+        this.sideBarView.render().el,
+        this.defaultIssuesView.render().el,
+        this.todoIssuesView.render().el,
+        this.doingIssuesView.render().el,
+        this.doneIssuesView.render().el
+      ]);
 
-      // setup child views
-      var sidebarView = new app.SidebarView();
-      sidebarView.render();
-      this.$el.append(sidebarView.$el);
+      return this;
+    },
 
-      // TODO split into categories
-      var issuesView = new app.IssueListView({collection: app.board.issues});
-      issuesView.render();
-      this.$el.append(issuesView.$el);
+    dispose: function () {
+      this.sideBarView.remove();
+      this.defaultIssuesView.remove();
+      this.todoIssuesView.remove();
+      this.doingIssuesView.remove();
+      this.doneIssuesView.remove();
+      this.remove();
     }
   });
 })();

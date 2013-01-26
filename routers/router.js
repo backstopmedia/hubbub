@@ -14,8 +14,8 @@
     manage: function(){
       // If there is an existing view, then remove it and clear any listeners
       if (this.currentView) this.currentView.dispose();
-      this.currentView = new app.ManageView();
-      $('#app-container').append(this.currentView);
+      this.currentView = new app.MainView();
+      $('#app-container').append(this.currentView.render().el);
     },
 
     welcome: function(){

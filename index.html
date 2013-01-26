@@ -17,7 +17,7 @@
         <% }); %>
       </ul>
     </script>
-    <script id='js-issue-list-template' type='text/template'>
+    <script id='js-issue-list-full-template' type='text/template'>
       <h2><%= title %></h2>
       <ul>
         <% issues.each(function (issue) { %>
@@ -27,6 +27,14 @@
             </a><br>
             <%= marked.parse(issue.get('body')) %>
           </li>
+        <% }); %>
+      </ul>
+    </script>
+    <script id='js-issue-list-template' type='text/template'>
+      <h4><%= title %></h4>
+      <ul>
+        <% issues.each(function (issue) { %>
+        <li data-issue-id='<%- issue.id %>'><%- issue.displayName() %></li>
         <% }); %>
       </ul>
     </script>
