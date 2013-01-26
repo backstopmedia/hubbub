@@ -48,10 +48,11 @@
             <%= marked.parse(issue.get('body')) %>
           </div>
           <div class='modal-footer'>
-            <select name='status'>
-              <option value='todo'>To Do</option>
-              <option value='doing'>Doing</option>
-              <option value='done'>Done</option>
+            <select name='category'>
+              <option value='default' <% if (issue.get('category') === 'default') { %>selected<% } %>>Uncategorized</option>
+              <option value='todo' <% if (issue.get('category') === 'todo') { %>selected<% } %>>To Do</option>
+              <option value='doing' <% if (issue.get('category') === 'doing') { %>selected<% } %>>Doing</option>
+              <option value='done' <% if (issue.get('category') === 'done') { %>selected<% } %>>Done</option>
             </select>
           </div>
         </div>

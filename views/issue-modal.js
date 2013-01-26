@@ -12,7 +12,7 @@
 
     events: {
       // you can use any jQuery selectors here
-      'change select[name="status"]': 'statusChanged',
+      'change select[name="category"]': 'categoryChanged',
       'click .modal-mask': 'remove'
     },
 
@@ -21,7 +21,7 @@
       $('body').prepend(this.$el);
     },
 
-    statusChanged: function (ev) {
+    categoryChanged: function (ev) {
       var category = $(ev.target).val();
       this.model.set('category', category);
       this.remove();
