@@ -13,7 +13,7 @@
 
     resultsTemplate: _.template($('#js-search-results-template').html()),
 
-    className:"row-fluid",
+    className: "row-fluid",
 
     events: {
       'click #js-add-button': 'search',
