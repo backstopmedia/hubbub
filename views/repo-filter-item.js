@@ -10,18 +10,22 @@
     className: 'li',
     events: {
       'change input': 'applyFilter',
-      'click js-refresh': 'refresh',
-      'click js-remove': 'remove'
+      'click .js-refresh': 'refresh',
+      'click .js-remove': 'remove'
     },
 
     applyFilter: function () {
       var checked = this.$('input').is(':checked');
-      console.log(this.model.issues);
       app.board.filteredIssues[checked ? 'add' : 'remove'](this.model.issues);
     },
 
     initialize: function () {
       this.listenTo(this.model, {
+        request: this.onRequest,
+        sync: this.onSync,
+        error: this.onError
+      });
+      this.listenTo(this.model.issues, {
         request: this.onRequest,
         sync: this.onSync,
         error: this.onError
