@@ -3,7 +3,9 @@
 
   var app = window.app;
 
-  var User = app.User = app.Model.extend({
+  var User = app.User = {};
+
+  User.Model = Backbone.Model.extend({
     initialize: function () {
       this.repos = new app.Repo.Collection();
       this.repos.owner = this;
@@ -17,7 +19,7 @@
   });
 
   User.Collection = app.Model.Collection.extend({
-    model: User,
+    model: User.Model,
 
     url: app.apiRoot + '/users'
   });
