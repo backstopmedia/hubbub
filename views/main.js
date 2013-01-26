@@ -7,7 +7,7 @@
 
   app.MainView = app.View.extend({
 
-    className: "row-fluid",
+    className: "row-fluid clearfix",
 
     render: function () {
       this.sideBarView = new app.SidebarView({collection:app.board.repos});
@@ -16,13 +16,15 @@
       this.doingIssuesView = new app.IssueListView({collection:app.board.doingIssues, title:"Doing"});
       this.doneIssuesView = new app.IssueListView({collection:app.board.doneIssues, title:"Done"});
 
-      this.$el.append([
+      this.$el.append(
         this.sideBarView.render().el,
-        this.defaultIssuesView.render().el,
-        this.todoIssuesView.render().el,
-        this.doingIssuesView.render().el,
-        this.doneIssuesView.render().el
-      ]);
+        $('<div class="issue-lists">').append(
+            this.defaultIssuesView.render().el,
+            this.todoIssuesView.render().el,
+            this.doingIssuesView.render().el,
+            this.doneIssuesView.render().el
+        )
+      );
 
       return this;
     },

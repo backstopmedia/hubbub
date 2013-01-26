@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  padding: 25px;
+  padding: 10px 0;
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, 'Lucida Grande', Arial, sans-serif;
 }
@@ -31,7 +31,8 @@ a {
 }
 
 .form-search input {
-  width: 100%;
+    box-sizing: border-box;
+    padding: 15px 10px;
 }
 .alert.empty,
 .well.empty {
@@ -43,19 +44,41 @@ a {
   color: #060;
   background: #CFC;
 }
-.js-issue-list ul {
+
+#sidebar {
+    width: 20%;
+    float: left;
+    /*border: solid 1px #ccc;*/
+}
+#sidebar ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+.issue-lists {
+    width: 79%;
+    float: left;
+    /*border: solid 1px #ccc;*/
+}
+
+.issue-list {
+    width: 23%;
+    float: left;
+    margin-left: 1%;
+}
+.issue-list ul {
     list-style: none;
     padding:0;
     margin:0;
 }
-.js-issue-list li {
+.issue-list li {
     font-size:12px;
     padding:5px;
     background:#ccc;
     list-style:none;
     margin:0;
 }
-.js-issue-list li:nth-child(even) {
+.issue-list li:nth-child(even) {
     background: #b2b2b2;
 }
 

@@ -11,8 +11,7 @@
   app.SidebarView = app.View.extend({
     template: _.template($('#js-sidebar-template').html()),
 
-    id: 'js-sidebar',
-    className: 'span2',
+    id: 'sidebar',
 
     events: {
       // repo searching
