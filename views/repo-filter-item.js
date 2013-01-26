@@ -41,7 +41,7 @@
     onSync: function () {
       this.$el
         .attr('title', 'Repo refreshed successfully!')
-        .removeClass('js-pending js-error').addClass('js-pending');
+        .removeClass('js-pending js-error').addClass('js-success');
       this.clearStatus(5000);
     },
 
@@ -72,7 +72,7 @@
     },
 
     remove: function () {
-      app.board.repos.remove(this.model);
+      this.model.destroy();
       app.View.prototype.remove.apply(this);
     },
 
