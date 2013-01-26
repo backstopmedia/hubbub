@@ -10,7 +10,6 @@
     className: "row-fluid",
 
     render: function () {
-
       this.sideBarView = new app.SidebarView({collection:app.board.repos});
       this.defaultIssuesView = new app.IssueListView({collection:app.board.defaultIssues, title:"Uncategorized"});
       this.todoIssuesView = new app.IssueListView({collection:app.board.todoIssues, title:"To Do"});
