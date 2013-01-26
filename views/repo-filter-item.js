@@ -11,7 +11,7 @@
     events: {
       'change input': 'applyFilter',
       'click .js-refresh': 'refresh',
-      'click .js-remove': 'remove'
+      'click .js-remove': 'destroy'
     },
 
     applyFilter: function () {
@@ -71,9 +71,8 @@
       });
     },
 
-    remove: function () {
+    destroy: function () {
       this.model.destroy();
-      app.View.prototype.remove.apply(this);
     },
 
     render: function () {

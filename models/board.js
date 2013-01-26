@@ -4,7 +4,7 @@
   var app = window.app;
 
   var Board = app.Board = app.Board || {};
-  
+
   Board.Model = Backbone.Model.extend({
     urlRoot: '/boards',
 
@@ -32,19 +32,18 @@
         // that repo's issues.
         remove: function (repo) {
           this.stopListening(repo.issues);
-          this.remove(repo.issues.models);
+          repo.issues.invoke('destroy');
         }
       });
 
       // Persist the Repos/Issues as soon as they're added/changed, or destroy
       // them if they leave their respective Collections
       this.listenTo(this.repos, {
-        'add change': function (repo) { repo.save(); },
-        remove: function (repo) { repo.destroy(); }
+        remove: function () { this.save(); },
+        'add change': function (repo) { repo.save(); }
       });
       this.listenTo(this.issues, {
-        'add change': function (issue) { issue.save(); },
-        remove: function (issue) { issue.destroy(); }
+        'add change': function (issue) { issue.save(); }
       });
 
       this.filteredIssues = new app.Issue.Collection();
