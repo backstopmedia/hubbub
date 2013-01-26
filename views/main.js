@@ -7,7 +7,7 @@
 
   app.MainView = app.View.extend({
 
-    className:"row-fluid",
+    className: "row-fluid",
 
     render: function () {
 
@@ -28,13 +28,13 @@
       return this;
     },
 
-    dispose: function () {
+    remove: function () {
       this.sideBarView.remove();
       this.defaultIssuesView.remove();
       this.todoIssuesView.remove();
       this.doingIssuesView.remove();
       this.doneIssuesView.remove();
-      this.remove();
+      return app.View.prototype.remove.call(this);
     }
   });
 })();

@@ -133,9 +133,9 @@
       this.message(xhr.status + ' ' + xhr.data.message, 'error');
     },
 
-    dispose: function() {
+    remove: function() {
       this.yourRepoView.remove();
-      this.remove();
+      return app.View.prototype.remove.call(this);
     }
   });
 })();

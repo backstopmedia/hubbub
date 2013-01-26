@@ -13,13 +13,13 @@
 
     manage: function(){
       // If there is an existing view, then remove it and clear any listeners
-      if (this.currentView) this.currentView.dispose();
+      if (this.currentView) this.currentView.remove();
       this.currentView = new app.MainView();
       $('#app-container').append(this.currentView.render().el);
     },
 
     welcome: function(){
-      if (this.currentView) this.currentView.dispose();
+      if (this.currentView) this.currentView.remove();
       this.currentView = new app.WelcomeView();
       $('#app-container').append(this.currentView.render().el);
     }
