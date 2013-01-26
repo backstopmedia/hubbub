@@ -21,7 +21,7 @@
       <h4><%= title %></h4>
       <ul>
         <% issues.each(function (issue) { %>
-        <li data-issue-id='<%- issue.id %>'><%- issue.displayName() %></li>
+        <li><a href='#issue/<%- issue.id %>'><%- issue.displayName() %></a></li>
         <% }); %>
       </ul>
     </script>
