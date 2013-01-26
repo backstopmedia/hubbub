@@ -3,6 +3,7 @@
 
   var _ = window._;
   var app = window.app;
+  var Backbone = window.Backbone;
 
   var Board = app.Board = app.Board || {};
 
