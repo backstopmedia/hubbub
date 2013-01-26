@@ -48,7 +48,7 @@
             <%= marked.parse(issue.get('body')) %>
           </div>
           <div class='modal-footer'>
-            <select name='category'>
+            <select name='category' autofocus>
               <option value='default' <% if (issue.get('category') === 'default') { %>selected<% } %>>Uncategorized</option>
               <option value='todo' <% if (issue.get('category') === 'todo') { %>selected<% } %>>To Do</option>
               <option value='doing' <% if (issue.get('category') === 'doing') { %>selected<% } %>>Doing</option>
