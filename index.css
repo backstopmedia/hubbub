@@ -33,3 +33,19 @@ a {
   color: #060;
   background: #CFC;
 }
+.js-issue-list ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+.js-issue-list li {
+    font-size:12px;
+    padding:5px;
+    background:#ccc;
+    list-style:none;
+    margin:0;
+}
+.js-issue-list li:nth-child(even) {
+    background: #b2b2b2;
+
+}

@@ -19,6 +19,14 @@
       this.issues.listenTo(this.repos, 'remove', function (repo) {
         this.stopListening(repo.issues);
       });
+      this.defaultIssues = new app.Issue.Collection();
+      this.defaultIssues.setFilter(this.issues, "category", "default");
+      this.doingIssues = new app.Issue.Collection();
+      this.doingIssues.setFilter(this.issues, "category", "doing");
+      this.todoIssues = new app.Issue.Collection();
+      this.todoIssues.setFilter(this.issues, "category", "todo");
+      this.doneIssues = new app.Issue.Collection();
+      this.doneIssues.setFilter(this.issues, "category", "done");
     },
 
     parse: function (res) {

@@ -7,23 +7,25 @@
 
   var addRe = /^(\w+)(?:\/([\w.\-]+))?$/;
 
-  var syncError;
+  app.WelcomeView = app.View.extend({
 
-  app.SidebarView = app.View.extend({
-    template: _.template($('#js-search-results-template').html()),
+    template: _.template($('#js-welcome-template').html()),
 
-    className:"span2",
-    id: "js-sidebar",
+    resultsTemplate: _.template($('#js-search-results-template').html()),
+
+    className:"row-fluid",
 
     events: {
       'click #js-add-button': 'search',
       'keydown #js-add-input': 'search',
-      'click .js-repo-result': 'repoClicked'
+      'click .js-repo-result': 'repoClicked',
+      'click .js-repo-remove' : 'removeRepo'
     },
 
     search: function (ev) {
       // Check for the enter key (keycode 13) if this is a keydown event.
       if (ev.type === 'keydown' && ev.which !== 13) return;
+      ev.preventDefault();
 
       var val = this.$('#js-add-input').val();
       var match = val.match(addRe);
@@ -42,6 +44,13 @@
         var user = new app.User({login: match[1]});
         this.findReposFor(user);
       }
+    },
+
+    removeRepo: function (ev) {
+      var repoId = $(ev.target).attr('data-repo-id');
+      var repo = app.board.repos.get(repoId);
+      app.board.repos.remove(repo);
+      app.board.save();
     },
 
     repoClicked: function (ev) {
@@ -83,8 +92,8 @@
     },
 
     message: function (message, type) {
-      var $box = this.$('#js-message').removeClass('js-error js-success');
-      if (type) $box.addClass('js-' + type);
+      var $box = this.$('#js-message').removeClass('alert-error alert-success');
+      if (type) $box.addClass('alert-' + type);
       $box.html(message);
     },
 
@@ -97,14 +106,38 @@
         success: function (repos) {
           // TODO use events on this collection for rendering
           self.repos = repos;
-          self.message(self.template({repos: repos}), 'success');
+          self.message("Succesfully Retrieved Repos", 'success');
+          self.$('#js-repo-search-list').html(self.resultsTemplate({repos: repos}));
         },
         error: _.bind(this.syncError, this)
       });
     },
 
+    render: function () {
+      this.$el.html(this.template());
+
+      this.yourRepoView = new app.RepoListView({collection:app.board.repos});
+      this.$('#js-your-repo-list').append(this.yourRepoView.render().el);
+
+      // setup child views
+      //var sidebarView = new app.SidebarView();
+      //sidebarView.render();
+      //this.$el.append(sidebarView.$el);
+
+      // TODO split into categories
+      //var issuesView = new app.IssueListView({collection: app.board.issues});
+      //issuesView.render();
+      //this.$el.append(issuesView.$el);
+      return this;
+    },
+
     syncError: function (__, xhr) {
       this.message(xhr.status + ' ' + xhr.data.message, 'error');
+    },
+
+    dispose: function() {
+      this.yourRepoView.remove();
+      this.remove();
     }
   });
 })();
