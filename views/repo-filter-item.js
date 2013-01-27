@@ -25,7 +25,6 @@
         sync: this.onSync,
         error: this.onError,
         'change:isActive': this.toggle
-
       });
       this.listenTo(this.model.issues, {
         request: this.onRequest,

@@ -21,9 +21,6 @@
       return sync.apply(this, arguments);
     }
 
-    // Trigger the `'request'` event (for symmetry with stock sync).
-    model.trigger('request', model, {}, options);
-
     // Use `localStorage` for persistence.
     var ls = window.localStorage;
 
@@ -75,9 +72,6 @@
 
     // Fire the success callback.
     options.success(model, res, options);
-
-    // Trigger the `'sync'` event.
-    model.trigger('sync', model, res, options);
   };
 
   // Override `Backbone.ajax` for JSONP support.
