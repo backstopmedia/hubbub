@@ -41,7 +41,6 @@
         if(value === testValue){
           // If the new value matches the test value then add the model
           self.add(model);
-        } else {
           // If the value doesn't match the test value then remove the model
           self.remove(model);
         }
