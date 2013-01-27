@@ -60,7 +60,7 @@
     case 'read':
       res = model instanceof Backbone.Model ?
         models[model.id] || {} :
-        _.values(models) || [];
+        _.values(models);
       break;
 
     // Destroy a model from `localStorage` based on its endpoint.
