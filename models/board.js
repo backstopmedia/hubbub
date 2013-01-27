@@ -8,11 +8,17 @@
   var Board = app.Board = app.Board || {};
 
   Board.Model = Backbone.Model.extend({
+    defaults: {
+      showWelcome: true
+    },
+
     urlRoot: '/boards',
 
     initialize: function () {
       this.repos = new app.Repo.Collection();
       this.issues = new app.Issue.Collection();
+
+      this.on('change', function () { this.save(); });
 
       this.issues.listenTo(this.repos, {
         add: function (repo) {

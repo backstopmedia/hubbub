@@ -141,3 +141,7 @@ a:hover {
 .modal-header .issue-title {
   margin-top: 10px;
 }
+
+.modal-footer .toggle-show-welcome-label {
+  float: left;
+}

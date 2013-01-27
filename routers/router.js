@@ -7,14 +7,10 @@
     initialize: function () {
       var welcome = new app.WelcomeModalView();
 
-      // We don't want to show the welcome modal every single time you visit,
-      // so we store a "visited" state in the `window.name` property which
-      // persists during a session.
-      if (window.name !== "visited") {
-        welcome.render();
-
-        window.name = "visited";
-      }
+      // Only show the welcome modal if the user hasn't opted out of it. This
+      // ensures the welcome message will always be shown at least once, and
+      // multiple times for those who don't want to hide it.
+      if (app.board.get('showWelcome')) welcome.render();
     },
 
     routes: {

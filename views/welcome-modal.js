@@ -12,7 +12,8 @@
 
     events: function(){
       return _.extend({},app.ModalView.prototype.events,{
-        'click .exit': 'removeAndBack'
+        'click .exit': 'removeAndBack',
+        'change .js-toggle-show-welcome': 'toggleShowWelcome'
       });
     },
 
@@ -24,6 +25,10 @@
 
 
     initialize: function() {
+    },
+
+    toggleShowWelcome: function (ev) {
+      app.board.set('showWelcome', $(ev.currentTarget).is(':checked'));
     }
   });
 })();
