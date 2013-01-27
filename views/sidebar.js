@@ -50,14 +50,17 @@
         // If there was a match in the second capture group, the entry is for
         // a repo.
       } else if (match[2]) {
-        var repo = new app.Repo({name: match[2], owner: {login: match[1]}});
+        var repo = new app.Repo.Model({
+          name: match[2],
+          owner: {login: match[1]}
+        });
         this.addRepo(repo);
 
         // Without a second capture group, the user must be searching for a
         // GitHub user.
       } else {
-        var user = new app.User({login: match[1]});
-        this.findReposFor(user);
+        var repos = app.Repo.Collection.withOwner(match[1]);
+        this.fetchRepos(repos);
       }
     },
 
@@ -67,11 +70,11 @@
       this.addRepo(repo);
     },
 
-    // Find repos for the given user and display them.
-    findReposFor: function (user) {
-      this.message('Fetching user...', 'pending');
+    // Find repos for the given repo collection and display them.
+    fetchRepos: function (repos) {
+      this.message('Fetching repos...', 'pending');
       var self = this;
-      user.repos.fetch({
+      repos.fetch({
         remote: true,
         success: function (repos) {
           // TODO use events on this collection for rendering

@@ -1,4 +1,4 @@
-(function () {
+(function (window) {
   'use strict';
 
   var _ = window._;
@@ -36,15 +36,4 @@
       return attrs;
     }
   });
-
-  Repo.Collection = Backbone.Collection.extend({
-    comparator: function (repo) { return repo.displayName(); },
-
-    model: Repo.Model,
-
-    url: function () {
-      if (this.owner) return this.owner.url() + '/repos';
-      return app.apiRoot + '/repositories';
-    }
-  });
-})();
+})(this);
