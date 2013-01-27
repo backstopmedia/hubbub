@@ -61,10 +61,4 @@
       return this.repos;
     }
   });
-
-  Board.Collection = Backbone.Collection.extend({
-    model: Board,
-
-    url: '/boards'
-  });
 })(this);
