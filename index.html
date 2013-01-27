@@ -87,10 +87,11 @@
     </script>
 
     <script id='js-sidebar-template' type='text/template'>
+      <img src='img/logo.png' class='logo'>
       <div class='repo-search'>
-        <form class='form-search'>
-          <input type='text' placeholder='documentcloud/backbone' id='js-add-input' />
-          <button id='js-add-button' class='btn'>Find</button>
+        <form class='form-search js-repo-search-form'>
+          <label for='js-add-input'>Find a user or user/repo</label>
+          <input type='text' placeholder='documentcloud/backbone' id='js-add-input'>
         </form>
         <div id='js-message' class='alert empty'></div>
         <div class='well empty' id='js-repo-search-list'></div>
@@ -146,9 +147,7 @@
   </head>
 
   <body>
-    <div class="container-fluid" id="app-container">
-      <h2>Hubbub</h2>
-    </div>
+    <div class="container-fluid" id="app-container"></div>
   </body>
 
 </html>

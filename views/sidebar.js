@@ -16,8 +16,7 @@
     events: {
       // repo searching
       'click #js-add-button': 'search',
-      'keydown #js-add-input': 'search',
-      'click .js-repo-result': 'searchResultClicked'
+      'submit .js-repo-search-form': 'search'
     },
 
     initialize: function () {
@@ -37,11 +36,7 @@
       return this;
     },
 
-    search: function (ev) {
-      // Check for the enter key (keycode 13) if this is a keydown event.
-      if (ev.type === 'keydown' && ev.which !== 13) return;
-      ev.preventDefault();
-
+    search: function () {
       var val = this.$('#js-add-input').val();
       var match = val.match(addRe);
       if (!match) {
@@ -62,6 +57,7 @@
         var repos = app.Repo.Collection.withOwner(match[1]);
         this.fetchRepos(repos);
       }
+      return false;
     },
 
     searchResultClicked: function (ev) {

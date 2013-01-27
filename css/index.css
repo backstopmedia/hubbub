@@ -1,9 +1,13 @@
 /* Require Bootstrap styles. */
 @import "bootstrap.css";
 
+* {
+  word-wrap: break-word;
+}
+
 body {
   margin: 0;
-  padding: 10px 0;
+  padding: 0;
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, 'Lucida Grande', Arial, sans-serif;
 }
@@ -16,23 +20,28 @@ a {
   padding: 10px;
   border: 1px solid #333;
   color: #333;
-  background: #CCC;
+  background: #ccc;
 }
 .js-pending {
   border-color: #660;
   color: #660;
-  background: #FFC;
+  background: #ffc;
 }
 
 .js-error {
   border-color: #600;
   color: #600;
-  background: #FCC;
+  background: #fcc;
+}
+
+.form-search label {
+  font-weight: bold;
 }
 
 .form-search input {
     box-sizing: border-box;
     padding: 15px 10px;
+    width: 100%;
 }
 .alert.empty,
 .well.empty {
@@ -42,7 +51,7 @@ a {
 .js-success {
   border-color: #060;
   color: #060;
-  background: #CFC;
+  background: #cfc;
 }
 
 #sidebar {
@@ -53,6 +62,11 @@ a {
 #sidebar ul {
     list-style-type: none;
     margin: 0;
+}
+
+#sidebar .logo {
+  margin: 10px 0;
+  width: 100%;
 }
 
 .issue-lists {
