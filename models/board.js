@@ -20,28 +20,22 @@
 
       this.on('change', function () { this.save(); });
 
-      this.issues.listenTo(this.repos, {
+      // Save the board when a repo is added or removed.
+      this.listenTo(this.repos, {
         add: function (repo) {
-
-          // When an Issue is added to the Repo, add it to the global
-          // Collection.
-          this.listenTo(repo.issues, 'add', this.add);
-
-          // When an Issue is added to the Repo, remove it from the global
-          // Collection.
-          this.listenTo(repo.issues, 'remove', this.remove);
+          this.issues.add(repo.issues.models);
+          this.issues.listenTo(repo.issues, 'add', this.issues.add);
+          this.save();
         },
-
-        // When Repo is removed, stop listening to its events and remove all of
-        // that repo's issues.
         remove: function (repo) {
-          this.stopListening(repo.issues);
-          _.invoke(repo.issues.models.slice(), 'destroy');
+          this.issues.stopListening(repo);
+          this.save();
         }
       });
 
-      // Save the board when a repo is destroyed.
-      this.listenTo(this.repos, 'remove', function () { this.save(); });
+      // Save repos and issues when they are added or changed.
+      this.repos.on('add change', function (repo) { repo.save(); });
+      this.issues.on('add change', function (issue) { issue.save(); });
     },
 
     parse: function (res) {
@@ -60,11 +54,6 @@
       var attrs = _.clone(this.attributes);
       attrs.repos = this.repos.invoke('toBoard');
       return attrs;
-    },
-
-    // preferable to provide a getter function than to access private variables
-    getRepos: function () {
-      return this.repos;
     }
   });
 })(this);

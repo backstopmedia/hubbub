@@ -18,6 +18,11 @@
     initialize: function () {
       this.issues = new app.Issue.Collection();
       this.issues.repo = this;
+
+      // When this is destroyed, destroy its issues too.
+      this.on('destroy', function () {
+        _.invoke(this.issues.models.slice(), 'destroy');
+      });
     },
 
     url: function () {

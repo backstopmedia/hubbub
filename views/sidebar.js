@@ -18,11 +18,6 @@
       'click .js-repo-result': 'searchResultClicked'
     },
 
-    initialize: function () {
-      // re-render sidebar when repos are added/removed
-      this.listenTo(app.board.repos, 'add remove', _.debounce(this.render));
-    },
-
     render: function () {
       this.$el.html(this.template({repos: this.collection}));
       this.repoFilterView = new app.ListView({
@@ -99,15 +94,12 @@
         // If we successfully fetched the repo, add it to the user's repo list
         // and save.
         success: function () {
-          repo.save();
-          app.board.repos.add(repo);
           self.message('Repo found, fetching issues...', 'pending');
           repo.issues.fetch({
             update: true,
             remote: true,
-            success: function (issues) {
-              issues.invoke('save');
-              app.board.save();
+            success: function () {
+              app.board.repos.add(repo);
               self.message('Added: ' + repo.displayName(), 'success');
             },
             error: function (__, xhr) {
