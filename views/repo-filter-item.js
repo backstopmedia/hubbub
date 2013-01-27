@@ -34,20 +34,23 @@
       });
     },
 
-    onRequest: function () {
+    onRequest: function (model, xhr, options) {
+      if (!options.remote) return;
       this.$el
         .attr('title', 'Refreshing this repo...')
         .removeClass('js-success js-error').addClass('js-pending');
     },
 
-    onSync: function () {
+    onSync: function (model, xhr, options) {
+      if (!options.remote) return;
       this.$el
         .attr('title', 'Repo refreshed successfully!')
         .removeClass('js-pending js-error').addClass('js-success');
       this.clearStatus(5000);
     },
 
-    onError: function (__, xhr) {
+    onError: function (model, xhr, options) {
+      if (!options.remote) return;
       this.$el
         .attr('title', xhr.status + ' Error: ' + xhr.data.message)
         .removeClass('js-pending js-success').addClass('js-error');
