@@ -35,6 +35,7 @@
       var match = val.match(addRe);
       if (!match) {
         this.message('Please enter a valid user or user/repo combo.', 'error');
+        return false;
 
         // If there was a match in the second capture group, the entry is for
         // a repo.
@@ -51,6 +52,7 @@
         var repos = app.Repo.Collection.withOwner(match[1]);
         this.fetchRepos(repos);
       }
+      this.$('#js-add-input').val('');
       return false;
     },
 
@@ -81,12 +83,13 @@
     message: function (message, type) {
       var $box = this.$('#js-message').removeClass('alert-error alert-success');
       if (type) $box.addClass('alert-' + type);
-      $box.html(message);
-      $box.removeClass('empty');
+      if (message) return $box.html(message).removeClass('empty');
+      $box.addClass('empty');
     },
 
     addRepo: function (repo) {
       this.message('Fetching repo...', 'pending');
+      this.$('#js-repo-search-list').addClass('empty');
       var self = this;
       repo.fetch({
         remote: true,
@@ -100,7 +103,7 @@
             remote: true,
             success: function () {
               app.board.repos.add(repo);
-              self.message('Added: ' + repo.displayName(), 'success');
+              self.message();
             },
             error: function (__, xhr) {
               repo.destroy();
