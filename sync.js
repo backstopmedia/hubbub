@@ -17,7 +17,7 @@
     // READ is the only case to proxy to the original `Backbone.sync`,
     // but only if the `options.remote` flag is set to `true`.
     if (method === 'read' && options.remote) {
-      options.data = _.extend({}, options.data, {per_page: 100});
+      options.data = _.extend({per_page: 100}, options.data);
       return sync.apply(this, arguments);
     }
 
