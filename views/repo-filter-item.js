@@ -15,15 +15,17 @@
     },
 
     applyFilter: function () {
-      var checked = this.$('input').is(':checked');
-      app.board.filteredIssues[checked ? 'add' : 'remove'](this.model.issues.models);
+      this.model.set('isActive', this.$('input').is(':checked'));
+      this.model.save();
     },
 
     initialize: function () {
       this.listenTo(this.model, {
         request: this.onRequest,
         sync: this.onSync,
-        error: this.onError
+        error: this.onError,
+        'change:isActive': this.toggle
+
       });
       this.listenTo(this.model.issues, {
         request: this.onRequest,

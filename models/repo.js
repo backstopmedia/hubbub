@@ -7,6 +7,10 @@
   var Repo = app.Repo = app.Repo || {};
 
   Repo.Model = Backbone.Model.extend({
+    defaults: {
+      isActive: true
+    },
+
     displayName: function () {
       return this.get('owner').login + '/' + this.get('name');
     },

@@ -30,6 +30,7 @@
     categoryChanged: function (ev) {
       var category = $(ev.target).val();
       this.model.set('category', category);
+      this.model.save();
       this.removeAndBack();
     },
 

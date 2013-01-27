@@ -34,22 +34,8 @@
         }
       });
 
-      // Persist the Repos/Issues as soon as they're added/changed, or destroy
-      // them if they leave their respective Collections
-      this.listenTo(this.repos, {
-        remove: function () { this.save(); },
-        'add change': function (repo) { repo.save(); }
-      });
-      this.listenTo(this.issues, {
-        'add change': function (issue) { issue.save(); }
-      });
-
-      this.filteredIssues = new app.Issue.Collection();
-      this.filteredIssues.listenTo(this.issues, {
-        add: this.filteredIssues.add,
-        remove: this.filteredIssues.remove
-      });
-
+      // Save the board when a repo is destroyed.
+      this.listenTo(this.repos, 'remove', function () { this.save(); });
     },
 
     parse: function (res) {
