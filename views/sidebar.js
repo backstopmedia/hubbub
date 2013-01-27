@@ -14,9 +14,8 @@
     id: 'sidebar',
 
     events: {
-      // repo searching
-      'click #js-add-button': 'search',
-      'submit .js-repo-search-form': 'search'
+      'submit .js-repo-search-form': 'search',
+      'click .js-repo-result': 'searchResultClicked'
     },
 
     initialize: function () {
