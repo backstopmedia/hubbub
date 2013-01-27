@@ -54,5 +54,7 @@ window.jQuery(function () {
     var repos = app.Repo.Collection.withOwner('bob');
     repos.fetch();
     equal(repos.length, 1);
+    repo.destroy();
+    board.destroy();
   });
 });

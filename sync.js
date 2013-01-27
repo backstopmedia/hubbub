@@ -45,10 +45,10 @@
 
       // In the CREATE case, we need to give the model a unique `id`.
       if (method === 'create') {
-        var next = 1;
+        var available = 1;
         // Iterate over the existing `id`s and find the next available one.
-        for (var id in models) if (next <= +id) next = +id + 1;
-        res.id = next;
+        for (var id in models) if (available <= +id) available = +id + 1;
+        res.id = available;
       }
 
       // Save the model to `localStorage`
