@@ -14,9 +14,6 @@
   //  C. Not have to alter any other Backbone methods to do so.
   Backbone.sync = function (method, model, options) {
 
-    // Ensure an options object.
-    options = (options || {});
-
     // READ is the only case to proxy to the original `Backbone.sync`,
     // but only if the `options.remote` flag is set to `true`.
     if (method === 'read' && options.remote) {

@@ -1,10 +1,12 @@
 (function (window) {
   'use strict';
 
+  var _ = window._;
   var app = window.app;
+  var Backbone = window.Backbone;
 
   var Board = app.Board = app.Board || {};
-  
+
   Board.Model = Backbone.Model.extend({
     urlRoot: '/boards',
 
@@ -17,42 +19,23 @@
 
           // When an Issue is added to the Repo, add it to the global
           // Collection.
-          this.listenTo(repo.issues, 'add', function (issue) {
-            this.add(issue);
-          });
+          this.listenTo(repo.issues, 'add', this.add);
 
           // When an Issue is added to the Repo, remove it from the global
           // Collection.
-          this.listenTo(repo.issues, 'remove', function (issue) {
-            this.remove(issue);
-          });
+          this.listenTo(repo.issues, 'remove', this.remove);
         },
 
         // When Repo is removed, stop listening to its events and remove all of
         // that repo's issues.
         remove: function (repo) {
           this.stopListening(repo.issues);
-          this.remove(repo.issues.models);
+          _.invoke(repo.issues.models.slice(), 'destroy');
         }
       });
 
-      // Persist the Repos/Issues as soon as they're added/changed, or destroy
-      // them if they leave their respective Collections
-      this.listenTo(this.repos, {
-        'add change': function (repo) { repo.save(); },
-        remove: function (repo) { repo.destroy(); }
-      });
-      this.listenTo(this.issues, {
-        'add change': function (issue) { issue.save(); },
-        remove: function (issue) { issue.destroy(); }
-      });
-
-      this.filteredIssues = new app.Issue.Collection();
-      this.filteredIssues.listenTo(this.issues, {
-        add: this.filteredIssues.add,
-        remove: this.filteredIssues.remove
-      });
-
+      // Save the board when a repo is destroyed.
+      this.listenTo(this.repos, 'remove', function () { this.save(); });
     },
 
     parse: function (res) {

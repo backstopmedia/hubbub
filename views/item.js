@@ -10,10 +10,18 @@
 
     template: _.template($('#js-issue-item-template').html()),
 
-    render: function () {
-      this.$el.html(this.template({issue:this.model}));
-      return this;
-    }
+    initialize: function () {
+      this.listenTo(this.model.repo, 'change:isActive', this.toggle);
+    },
 
+    render: function () {
+      this.$el.html(this.template({issue: this.model}));
+      this.toggle();
+      return this;
+    },
+
+    toggle: function () {
+      this.$el[this.model.repo.get('isActive') ? 'show' : 'hide']();
+    }
   });
 })();

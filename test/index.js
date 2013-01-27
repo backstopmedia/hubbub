@@ -44,7 +44,7 @@ window.jQuery(function () {
   });
 
   test('repo url is correct', function () {
-    var repo = new app.Repo({
+    var repo = new app.Repo.Model({
       name: 'backbone',
       owner: {login: 'backstopmedia'}
     });
@@ -53,7 +53,7 @@ window.jQuery(function () {
   });
 
   test('repo issues url is correct', function () {
-    var repo = new app.Repo({
+    var repo = new app.Repo.Model({
       name: 'backbone',
       owner: {login: 'backstopmedia'}
     });
@@ -62,7 +62,7 @@ window.jQuery(function () {
   });
 
   test('repo should have an owner/name style displayName', function () {
-    var repo = new app.Repo({
+    var repo = new app.Repo.Model({
       name: 'backbone',
       owner: {login: 'backstopmedia'}
     });
@@ -71,9 +71,9 @@ window.jQuery(function () {
 
   test('adding a repo to the board should persist the repo', function () {
     // TODO simplify this test
-    var board = new app.Board();
+    var board = new app.Board.Model();
     var repos = board.getRepos();
-    var repo = new app.Repo({
+    var repo = new app.Repo.Model({
       name: 'backbone',
       owner: {login: 'bob'}
     });

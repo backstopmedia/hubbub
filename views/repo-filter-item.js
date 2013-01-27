@@ -11,19 +11,21 @@
     events: {
       'change input': 'applyFilter',
       'click .js-refresh': 'refresh',
-      'click .js-remove': 'remove'
+      'click .js-remove': 'destroy'
     },
 
     applyFilter: function () {
-      var checked = this.$('input').is(':checked');
-      app.board.filteredIssues[checked ? 'add' : 'remove'](this.model.issues.models);
+      this.model.set('isActive', this.$('input').is(':checked'));
+      this.model.save();
     },
 
     initialize: function () {
       this.listenTo(this.model, {
         request: this.onRequest,
         sync: this.onSync,
-        error: this.onError
+        error: this.onError,
+        'change:isActive': this.toggle
+
       });
       this.listenTo(this.model.issues, {
         request: this.onRequest,
@@ -41,7 +43,7 @@
     onSync: function () {
       this.$el
         .attr('title', 'Repo refreshed successfully!')
-        .removeClass('js-pending js-error').addClass('js-pending');
+        .removeClass('js-pending js-error').addClass('js-success');
       this.clearStatus(5000);
     },
 
@@ -71,9 +73,8 @@
       });
     },
 
-    remove: function () {
-      app.board.repos.remove(this.model);
-      app.View.prototype.remove.apply(this);
+    destroy: function () {
+      this.model.destroy();
     },
 
     render: function () {
