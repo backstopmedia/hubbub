@@ -28,7 +28,9 @@
       var $el = this.$el;
       var $models = $el.children();
       this.collection.each(function (model, i) {
-        var el = views[model.cid].el;
+        var view = views[model.cid];
+        if (!view) return;
+        var el = view.el;
         if (!$models[i]) {
           $el.append(el);
         } else if ($models[i] !== el) {

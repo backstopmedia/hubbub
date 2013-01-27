@@ -14,35 +14,6 @@ window.jQuery(function () {
     }
   });
 
-  test('saving a new user assigns an ID', function () {
-    var user = new app.User();
-    user.on('change:id', function () { ok(true); });
-    user.save();
-  });
-
-  test('retrieving a recently saved user through a collection', function () {
-    var user = new app.User();
-    user.save();
-    var users = new app.User.Collection();
-    users.fetch();
-    equal(users.length, 1);
-  });
-
-  test('deleting users leaves an empty object in localStorage', function () {
-    var users = new app.User.Collection();
-    users.fetch();
-    users.each(function (user) { user.destroy(); });
-    equal(users.length, 0);
-    users.fetch();
-    equal(users.length, 0);
-  });
-
-  test('user url is correct', function () {
-    var user = new app.User({login: 'backstopmedia'});
-    var url = 'https://api.github.com/users/backstopmedia';
-    equal(_.result(user, 'url'), url);
-  });
-
   test('repo url is correct', function () {
     var repo = new app.Repo.Model({
       name: 'backbone',
@@ -72,16 +43,18 @@ window.jQuery(function () {
   test('adding a repo to the board should persist the repo', function () {
     // TODO simplify this test
     var board = new app.Board.Model();
-    var repos = board.getRepos();
+    board.save();
     var repo = new app.Repo.Model({
+      id: 1,
       name: 'backbone',
       owner: {login: 'bob'}
     });
-    repos.add(repo);
+    board.repos.add(repo);
 
-    var newRepos = new app.Repo.Collection();
-    newRepos.owner = new app.User({login: 'bob'});
-    newRepos.fetch();
-    equal(newRepos.length, 1);
+    var repos = app.Repo.Collection.withOwner('bob');
+    repos.fetch();
+    equal(repos.length, 1);
+    repo.destroy();
+    board.destroy();
   });
 });

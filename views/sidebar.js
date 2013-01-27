@@ -18,11 +18,6 @@
       'click .js-repo-result': 'searchResultClicked'
     },
 
-    initialize: function () {
-      // re-render sidebar when repos are added/removed
-      this.listenTo(app.board.repos, 'add remove', _.debounce(this.render));
-    },
-
     render: function () {
       this.$el.html(this.template({repos: this.collection}));
       this.repoFilterView = new app.ListView({
@@ -40,6 +35,7 @@
       var match = val.match(addRe);
       if (!match) {
         this.message('Please enter a valid user or user/repo combo.', 'error');
+        return false;
 
         // If there was a match in the second capture group, the entry is for
         // a repo.
@@ -56,6 +52,7 @@
         var repos = app.Repo.Collection.withOwner(match[1]);
         this.fetchRepos(repos);
       }
+      this.$('#js-add-input').val('');
       return false;
     },
 
@@ -86,12 +83,13 @@
     message: function (message, type) {
       var $box = this.$('#js-message').removeClass('alert-error alert-success');
       if (type) $box.addClass('alert-' + type);
-      $box.html(message);
-      $box.removeClass('empty');
+      if (message) return $box.html(message).removeClass('empty');
+      $box.addClass('empty');
     },
 
     addRepo: function (repo) {
       this.message('Fetching repo...', 'pending');
+      this.$('#js-repo-search-list').addClass('empty');
       var self = this;
       repo.fetch({
         remote: true,
@@ -99,16 +97,13 @@
         // If we successfully fetched the repo, add it to the user's repo list
         // and save.
         success: function () {
-          repo.save();
-          app.board.repos.add(repo);
           self.message('Repo found, fetching issues...', 'pending');
           repo.issues.fetch({
             update: true,
             remote: true,
-            success: function (issues) {
-              issues.invoke('save');
-              app.board.save();
-              self.message('Added: ' + repo.displayName(), 'success');
+            success: function () {
+              app.board.repos.add(repo);
+              self.message();
             },
             error: function (__, xhr) {
               repo.destroy();
