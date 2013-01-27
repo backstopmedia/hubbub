@@ -21,13 +21,17 @@
 
     setFilter: function(parent, testKey, testValue) {
       var self = this;
+      var onAdd = function(model) {
+        if (model.get(testKey) === testValue) {
+          self.add(model);
+        }
+      };
+      // If there are any existing models in the collection run them through the add
+      parent.each(onAdd);
+
       this.listenTo(parent, {
         // When a model is added to the parent, add it to this collection if it matches the test key / value
-        add: function(model) {
-          if (model.get(testKey) === testValue) {
-            self.add(model);
-          }
-        },
+        add: onAdd,
         // When a model is removed from the parent, remove it from this collection. This method is a "no op"  if the
         // collection doesn't contain the model.
         remove: self.remove
@@ -41,9 +45,6 @@
           // If the value doesn't match the test value then remove the model
           self.remove(model);
         }
-      });
-      parent.each(function(model) {
-        parent.trigger("add",model);
       });
     }
   });
