@@ -55,4 +55,15 @@ window.jQuery(function () {
     equal(filtered[0].id, 10341232);  // Confirm correct model is returned
   });
 
+  test('map & pluck', function () {
+    var issues = new app.Issue.Collection(testData);
+    var mapped = issues.map(function(issue) {
+      return issue.get("number");
+    });
+    var plucked = issues.pluck("number");
+    equal(plucked.toString(), mapped.toString()); // Mapped and plucked arrays should be the same
+    equal(plucked.length, 4); // Should have 4 values
+    equal(plucked[0], issues.at(0).get("number")); // First value should be equal to the number property of the first model
+  });
+
 });
