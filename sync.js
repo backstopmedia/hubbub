@@ -17,12 +17,9 @@
     // READ is the only case to proxy to the original `Backbone.sync`,
     // but only if the `options.remote` flag is set to `true`.
     if (method === 'read' && options.remote) {
-      options.data = _.extend({}, options.data, {per_page: 100});
+      options.data = _.extend({per_page: 100}, options.data);
       return sync.apply(this, arguments);
     }
-
-    // Trigger the `'request'` event (for symmetry with stock sync).
-    model.trigger('request', model, {}, options);
 
     // Use `localStorage` for persistence.
     var ls = window.localStorage;
@@ -75,9 +72,6 @@
 
     // Fire the success callback.
     options.success(model, res, options);
-
-    // Trigger the `'sync'` event.
-    model.trigger('sync', model, res, options);
   };
 
   // Override `Backbone.ajax` for JSONP support.
