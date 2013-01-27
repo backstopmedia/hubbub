@@ -47,7 +47,7 @@
       if (method === 'create') {
         var available = 1;
         // Iterate over the existing `id`s and find the next available one.
-        for (var id in models) if (available <= +id) available = +id + 1;
+        for (var id in models) if (available <= id) available = +id + 1;
         res.id = available;
       }
 
