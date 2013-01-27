@@ -22,7 +22,13 @@
       <ul></ul>
     </script>
     <script id='js-issue-item-template' type='text/template'>
-      <a href='#issue/<%- issue.id %>'><%- issue.displayName() %></a>
+      <a href='#issue/<%- issue.id %>'>
+        <strong>
+          <%- issue.repo.displayName() %>#<%- issue.get('number') %>
+        </strong>
+        <br>
+        <%- issue.get('title') %>
+      </a>
     </script>
 
     <!-- piggyback off Bootstrap Modal styles -->

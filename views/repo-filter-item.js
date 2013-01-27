@@ -68,7 +68,13 @@
       this.model.fetch({
         remote: true,
         success: function (repo) {
-          repo.issues.fetch({remote: true, update: true});
+          var remove = function (issue) { issue.destroy(); };
+          repo.issues.on('remove', remove);
+          repo.issues.fetch({
+            remote: true,
+            update: true,
+            complete: function () { repo.issues.off('remove', remove); }
+          });
         }
       });
     },
