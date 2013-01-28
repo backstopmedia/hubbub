@@ -8,11 +8,12 @@
   app.WelcomeModalView = app.ModalView.extend({
     className: 'issue-modal',
 
+    // TODO pre-render, since it has no variables?
     template: _.template($('#js-welcome-modal-template').html()),
 
     events: function(){
       return _.extend({},app.ModalView.prototype.events,{
-        'click .exit': 'removeAndBack',
+        'click .exit': 'close',
         'change .js-toggle-show-welcome': 'toggleShowWelcome'
       });
     },
@@ -21,10 +22,6 @@
       this.$el.html(this.template());
       $('body').prepend(this.$el);
       return this;
-    },
-
-
-    initialize: function() {
     },
 
     toggleShowWelcome: function (ev) {

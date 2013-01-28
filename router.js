@@ -1,4 +1,4 @@
-(function (window) {
+(function () {
   'use strict';
 
   var app = window.app;
@@ -16,11 +16,11 @@
     },
 
     manage: function () {
-      this.mainView.closeIssueModal();
+      this.mainView.closeModals();
     },
 
     issue: function (issueId) {
       this.mainView.showIssueModal(issueId);
     }
   });
-})(this);
+})();

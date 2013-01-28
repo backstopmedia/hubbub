@@ -13,18 +13,28 @@
 
     events: {
       // you can use any jQuery selectors here
-      'click .modal-mask': 'removeAndBack',
-      'click .modal' : 'stopPropagation'
+      'click .modal-mask': 'close',
+      'click .modal' : 'stopPropagation',
+      // note that an <input> element needs focus for this to work
+      'keydown': 'keydown'
     },
 
-    stopPropagation: function (ev){
+    // TODO render, where it inserts itself in the DOM
+
+    stopPropagation: function (ev) {
       ev.stopPropagation();
     },
 
-    removeAndBack: function (){
+    close: function () {
       this.remove();
-      // todo: later change to navigate to ""
-      app.router.navigate("");
+      // inform the parent that this modal has closed
+      this.trigger('close');
+    },
+
+    keydown: function(ev) {
+      if (ev.which === 27) { // ESC
+        this.close();
+      }
     }
   });
 })();

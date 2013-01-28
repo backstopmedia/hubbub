@@ -25,6 +25,13 @@
         mainView: this.mainView
       });
       Backbone.history.start();
+
+      // Only show the welcome modal if the user hasn't opted out of it. This
+      // ensures the welcome message will always be shown at least once, and
+      // multiple times for those who don't want to hide it.
+      if (app.board.get('showWelcome')) {
+        this.mainView.showWelcomeModal();
+      }
     }
   };
 

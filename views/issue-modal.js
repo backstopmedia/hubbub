@@ -11,8 +11,7 @@
     template: _.template($('#js-issue-modal-template').html()),
 
     events: _.extend({}, app.ModalView.prototype.events, {
-      'change select[name="category"]': 'categoryChanged',
-      'keydown': 'escRemove'
+      'change select[name="category"]': 'categoryChanged'
     }),
 
     render: function () {
@@ -21,17 +20,11 @@
       return this;
     },
 
-    escRemove: function(ev) {
-      if (ev.which === 27) { // ESC
-        this.remove();
-      }
-    },
-
     categoryChanged: function (ev) {
       var category = $(ev.target).val();
       this.model.set('category', category);
       this.model.save();
-      this.removeAndBack();
+      this.close();
     }
   });
 })();

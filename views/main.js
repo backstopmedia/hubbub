@@ -30,35 +30,41 @@
         $issueLists
       );
 
-      // Only show the welcome modal if the user hasn't opted out of it. This
-      // ensures the welcome message will always be shown at least once, and
-      // multiple times for those who don't want to hide it.
-      if (app.board.get('showWelcome')) {
-        this.showWelcomeModal();
-      }
-
       return this;
     },
 
     showWelcomeModal: function () {
-      var welcomeModal = new app.WelcomeModalView();
-      welcomeModal.render();
+      this.welcomeModal = new app.WelcomeModalView();
+      this.addModal(this.welcomeModal);
     },
 
     showIssueModal: function (issueId) {
       // make sure no other issues are open
-      this.closeIssueModal();
+      // this.closeIssueModal();
 
       var issue = app.board.issues.get(issueId);
       this.issueModal = new app.IssueModalView({model: issue});
-      this.issueModal.render();
+      this.addModal(this.issueModal);
     },
 
-    closeIssueModal: function () {
-      // remove any existing modal
+    addModal: function (modal) {
+      modal.render();
+      // listen to custom event fired from our modals
+      this.listenTo(modal, 'close', function () {
+        // return to 'manage'
+        app.router.navigate('');
+      });
+    },
+
+    closeModals: function () {
+      // ...if they exist
+
+      if (this.welcomeModal) {
+        this.welcomeModal.close();
+      }
+
       if (this.issueModal) {
-        this.issueModal.remove();
-        delete this.issueModal;
+        this.issueModal.close();
       }
     },
 
