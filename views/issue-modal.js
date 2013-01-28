@@ -16,7 +16,7 @@
 
     render: function () {
       this.$el.html(this.template({issue: this.model}));
-      $('body').prepend(this.$el);
+      app.ModalView.prototype.render.call(this);
       return this;
     },
 

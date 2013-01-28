@@ -20,7 +20,7 @@
 
     render: function () {
       this.$el.html(this.template());
-      $('body').prepend(this.$el);
+      app.ModalView.prototype.render.call(this);
       return this;
     },
 

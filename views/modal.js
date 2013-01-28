@@ -19,7 +19,11 @@
       'keydown': 'keydown'
     },
 
-    // TODO render, where it inserts itself in the DOM
+    render: function () {
+      // inject itself at the top of the DOM
+      $('body').prepend(this.$el);
+      return this;
+    },
 
     stopPropagation: function (ev) {
       ev.stopPropagation();
