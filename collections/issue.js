@@ -2,18 +2,19 @@
   'use strict';
 
   var app = window.app;
+  var Backbone = window.Backbone;
 
   var Issue = app.Issue = app.Issue || {};
 
   Issue.Collection = Backbone.Collection.extend({
+
+    model: Issue.Model,
 
     // Default sorting for issues will be reverse chronological order, newest
     // on top.
     comparator: function (issue) {
       return -+new Date(issue.get('created_at'));
     },
-
-    model: Issue.Model,
 
     url: function () {
       return this.repo.url() + '/issues';
@@ -49,4 +50,3 @@
     }
   });
 })(this);
-

@@ -6,16 +6,21 @@
 
   var Repo = app.Repo = app.Repo || {};
 
-  Repo.Collection = Backbone.Collection.extend({
-    comparator: function (repo) { return repo.displayName(); },
+  Repo.Collection = Backbone.Collection.extend(
+    // instance methods
+    {
+      model: Repo.Model,
 
-    model: Repo.Model
-  }, {
-    withOwner: function (login) {
-      var repos = new Repo.Collection();
-      repos.url = app.apiRoot + '/users/' + login + '/repos';
-      return repos;
+      comparator: function (repo) { return repo.displayName(); }
+    },
+    // class methods
+    {
+      withOwner: function (login) {
+        var repos = new Repo.Collection();
+        repos.url = app.apiRoot + '/users/' + login + '/repos';
+        return repos;
+      }
     }
-  });
+  );
 })(this);
 

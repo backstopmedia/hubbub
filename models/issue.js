@@ -7,6 +7,10 @@
   var Issue = app.Issue = app.Issue || {};
 
   Issue.Model = Backbone.Model.extend({
+    defaults: {
+      category: 'default'
+    },
+
     initialize: function () {
       this.repo = this.collection.repo;
     },
@@ -17,10 +21,6 @@
 
     urlRoot: function () {
       return this.repo.url() + '/issues';
-    },
-
-    defaults: {
-      category: "default"
     }
   });
 })(this);
