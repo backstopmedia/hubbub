@@ -17,7 +17,13 @@
       // retrieve previously saved data from localhost
       app.board.fetch();
 
-      app.router = new app.Router();
+      this.mainView = new app.MainView();
+      this.mainView.render();
+      $('#app-container').append(this.mainView.el);
+
+      app.router = new app.Router({
+        mainView: this.mainView
+      });
       Backbone.history.start();
     }
   };
