@@ -2,6 +2,7 @@
   'use strict';
 
   var app = window.app;
+  var Backbone = window.Backbone;
 
   var Issue = app.Issue = app.Issue || {};
 
@@ -16,13 +17,6 @@
 
     urlRoot: function () {
       return this.repo.url() + '/issues';
-    },
-
-    displayName: function () {
-      var repo = this.repo.displayName();
-      var number = this.get('number');
-      var title = this.get('title');
-      return repo + '#' + number + ': ' + title;
     },
 
     defaults: {
