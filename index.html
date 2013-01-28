@@ -97,7 +97,6 @@
     </script>
 
     <script id='js-sidebar-template' type='text/template'>
-      <img src='img/logo.png' class='logo'>
       <div class='repo-search'>
         <form class='form-search js-repo-search-form'>
           <label for='js-add-input'>Find a user or user/repo</label>
@@ -110,11 +109,14 @@
     </script>
 
     <script id='js-repo-filter-item-template' type='text/template'>
-      <input type='checkbox' <%= repo.get('isActive') ? ' checked' : '' %>>
-        <%- repo.displayName() %>
-      </label>
-      <i class='js-refresh icon-refresh'></i>
-      <i class='js-remove icon-remove'></i>
+      <nobr>
+        <label>
+          <input type='checkbox' <%= repo.get('isActive') ? ' checked' : '' %>>
+          <%- repo.displayName() %>
+        </label>
+        <i class='js-refresh icon-refresh'></i>
+        <i class='js-remove icon-remove'></i>
+      </nobr>
     </script>
 
 
@@ -157,7 +159,7 @@
   </head>
 
   <body>
-    <div class="container-fluid" id="app-container"></div>
+    <div id="app-container"></div>
   </body>
 
 </html>

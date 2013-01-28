@@ -7,8 +7,6 @@
 
   app.MainView = app.View.extend({
 
-    className: "row-fluid clearfix",
-
     // assume this is only being rendered once
     render: function () {
       this.sideBarView = new app.SidebarView({collection:app.board.repos});

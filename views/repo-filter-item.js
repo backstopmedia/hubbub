@@ -8,6 +8,7 @@
   app.RepoFilterItemView = app.View.extend({
     template: _.template($('#js-repo-filter-item-template').html()),
     tagName: 'li',
+    className: 'js-repo-filter-item',
     events: {
       'change input': 'applyFilter',
       'click .js-refresh': 'refresh',

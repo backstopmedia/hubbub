@@ -20,6 +20,10 @@ a:hover {
   text-decoration: none;
 }
 
+#app-container {
+  min-width: 1000px;
+}
+
 .box {
   padding: 10px;
   border: 1px solid #333;
@@ -59,8 +63,11 @@ a:hover {
 }
 
 #sidebar {
-    width: 20%;
     float: left;
+    width: 280px;
+    padding: 90px 10px 10px;
+    background: url('../img/logo.png') no-repeat center 10px;
+    background-size: 300px 70px;
     /*border: solid 1px #ccc;*/
 }
 #sidebar ul {
@@ -74,15 +81,14 @@ a:hover {
 }
 
 .issue-lists {
-    width: 79%;
-    float: left;
-    /*border: solid 1px #ccc;*/
+  overflow: auto;
 }
 
 .issue-list {
-    width: 23%;
-    float: left;
-    margin-left: 1%;
+  display: inline-block;
+  width: 23%;
+  margin: 0 1%;
+  vertical-align: top;
 }
 .issue-list h4 {
   padding: 10px;
@@ -144,4 +150,17 @@ a:hover {
 
 .modal-footer .toggle-show-welcome-label {
   float: left;
+}
+
+.js-repo-filter-item {
+  padding: 5px;
+  font-size: 12px;
+}
+
+.js-repo-filter-item label {
+  display: inline;
+}
+
+.js-repo-filter-item i {
+  cursor: pointer;
 }
