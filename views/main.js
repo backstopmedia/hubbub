@@ -34,25 +34,27 @@
     },
 
     showWelcomeModal: function () {
-      this.welcomeModal = new app.WelcomeModalView();
-      this.addModal(this.welcomeModal);
+      var modal = this.welcomeModal = new app.WelcomeModalView();
+      modal.render();
+
+      // listen to custom event fired from the modal
+      this.listenTo(modal, 'close', function () {
+        // cleanup
+        delete this.welcomeModal;
+      });
     },
 
     showIssueModal: function (issueId) {
-      // make sure no other issues are open
-      // this.closeIssueModal();
-
       var issue = app.board.issues.get(issueId);
-      this.issueModal = new app.IssueModalView({model: issue});
-      this.addModal(this.issueModal);
-    },
-
-    addModal: function (modal) {
+      var modal = this.issueModal = new app.IssueModalView({model: issue});
       modal.render();
-      // listen to custom event fired from our modals
+
+      // listen to custom event fired from the modal
       this.listenTo(modal, 'close', function () {
         // return to 'manage'
         app.router.navigate('');
+        // cleanup
+        delete this.issueModal;
       });
     },
 
