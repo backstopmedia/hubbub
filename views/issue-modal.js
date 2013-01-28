@@ -22,7 +22,7 @@
     },
 
     escRemove: function(ev) {
-      if (ev.which === 27) {
+      if (ev.which === 27) { // ESC
         this.remove();
       }
     },
@@ -32,10 +32,6 @@
       this.model.set('category', category);
       this.model.save();
       this.removeAndBack();
-    },
-
-
-    initialize: function() {
     }
   });
 })();
