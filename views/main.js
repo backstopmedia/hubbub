@@ -7,7 +7,6 @@
 
   app.MainView = app.View.extend({
 
-    // assume this is only being rendered once
     render: function () {
       this.sideBarView = new app.SidebarView({collection:app.board.repos});
       this.defaultIssuesView = new app.IssueHolderView({testKey:"category", testValue:"default", title:"Uncategorized"});
@@ -44,7 +43,7 @@
 
       // listen to custom event fired from the modal
       this.listenTo(modal, 'close', function () {
-        // cleanup
+        // remove the reference to the modal, since we don't need it anymore
         delete this.welcomeModal;
       });
     },
@@ -56,9 +55,9 @@
 
       // listen to custom event fired from the modal
       this.listenTo(modal, 'close', function () {
-        // return to 'manage'
+        // notify the Router that we've returned to the 'manage' view
         app.router.navigate('');
-        // cleanup
+        // remove the reference to the modal, since we don't need it anymore
         delete this.issueModal;
       });
     },
