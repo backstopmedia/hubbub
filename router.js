@@ -8,8 +8,10 @@
     routes: {
       // the base URL - "managing" the lists of issues
       '': 'manage',
+      // an alias for the root URL
+      'issues': 'manage',
       // viewing a particular issue
-      'issue/:id': 'issue'
+      'issues/:id': 'issue'
     },
 
     initialize: function (options) {
