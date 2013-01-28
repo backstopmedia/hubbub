@@ -13,7 +13,7 @@
         sort: this.sortModels,
         remove: this.removeModel
       });
-      this.collection.each(_.bind(this.addModel, this));
+      this.collection.each(this.addModel, this);
     },
 
     addModel: function (model) {
