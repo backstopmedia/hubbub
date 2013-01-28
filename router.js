@@ -3,16 +3,17 @@
 
   var app = window.app;
   var Backbone = window.Backbone;
-  var $ = window.jQuery;
 
   app.Router = Backbone.Router.extend({
-    initialize: function (options) {
-      this.mainView = options.mainView;
+    routes: {
+      // the base URL - "managing" the lists of issues
+      '': 'manage',
+      // viewing a particular issue
+      'issue/:id': 'issue'
     },
 
-    routes: {
-      '': 'manage',
-      'issue/:id': 'issue'
+    initialize: function (options) {
+      this.mainView = options.mainView;
     },
 
     manage: function () {
