@@ -10,7 +10,7 @@
     // instance methods
     {
       model: Repo.Model,
-
+      // sort by owner login name, then repo name
       comparator: function (repo) { return repo.displayName(); }
     },
     // class methods

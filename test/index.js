@@ -33,6 +33,11 @@ window.jQuery(function () {
     equal(repo.displayName(), 'backstopmedia/backbone');
   });
 
+  test('app.Repo.Collection.withOwner() should set the `url`', function () {
+    var repos = app.Repo.Collection.withOwner('bob');
+    equal(_.result(repos, 'url'), 'https://api.github.com/users/bob/repos');
+  });
+
   test('adding a repo to the board should persist the repo', function () {
     var board = new app.Board.Model();
     var repo = new app.Repo.Model({
