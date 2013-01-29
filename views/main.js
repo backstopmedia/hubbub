@@ -8,6 +8,8 @@
   app.MainView = app.View.extend({
 
     render: function () {
+      // create and insert each of the columns
+
       this.sideBarView = new app.SidebarView({collection:app.board.repos});
       this.defaultIssuesView = new app.IssueHolderView({testKey:"category", testValue:"default", title:"Uncategorized"});
       this.todoIssuesView = new app.IssueHolderView({testKey:"category", testValue:"todo", title:"To Do"});
@@ -26,6 +28,7 @@
         this.sideBarView.render().el,
         $issueLists
       );
+
 
       // Only show the welcome modal if the user hasn't opted out of it. This
       // ensures the welcome message will always be shown at least once, and
@@ -68,13 +71,13 @@
       if (this.welcomeModal) {
         this.welcomeModal.close();
       }
-
       if (this.issueModal) {
         this.issueModal.close();
       }
     },
 
     remove: function () {
+      // make sure each of the columns are removed
       this.sideBarView.remove();
       this.defaultIssuesView.remove();
       this.todoIssuesView.remove();
