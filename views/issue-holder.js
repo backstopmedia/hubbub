@@ -5,7 +5,7 @@
   var _ = window._;
   var app = window.app;
 
-  app.IssueHolderView = app.View.extend({
+  app.IssueHolderView = Backbone.View.extend({
     className: 'issue-list',
 
     initialize: function(options) {

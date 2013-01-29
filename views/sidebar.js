@@ -8,7 +8,7 @@
   var addRe = /^(\w+)(?:\/([\w.\-]+))?$/;
   var resultsTemplate = _.template($('#js-search-results-template').html());
 
-  app.SidebarView = app.View.extend({
+  app.SidebarView = Backbone.View.extend({
     template: _.template($('#js-sidebar-template').html()),
 
     id: 'sidebar',

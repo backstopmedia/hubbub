@@ -5,7 +5,7 @@
   var _ = window._;
   var app = window.app;
 
-  app.RepoFilterItemView = app.View.extend({
+  app.RepoFilterItemView = Backbone.View.extend({
     template: _.template($('#js-repo-filter-item-template').html()),
     tagName: 'li',
     className: 'js-repo-filter-item',

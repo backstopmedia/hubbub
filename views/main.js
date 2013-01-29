@@ -5,7 +5,7 @@
   var _ = window._;
   var app = window.app;
 
-  app.MainView = app.View.extend({
+  app.MainView = Backbone.View.extend({
 
     render: function () {
       // create and insert each of the columns
@@ -83,7 +83,7 @@
       this.todoIssuesView.remove();
       this.doingIssuesView.remove();
       this.doneIssuesView.remove();
-      return app.View.prototype.remove.call(this);
+      return Backbone.View.prototype.remove.call(this);
     }
   });
 })();

@@ -5,7 +5,7 @@
   var _ = window._;
   var app = window.app;
 
-  app.ItemView = app.View.extend({
+  app.ItemView = Backbone.View.extend({
     tagName: "li",
 
     template: _.template($('#js-issue-item-template').html()),

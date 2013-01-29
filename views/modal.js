@@ -6,7 +6,7 @@
   var _ = window._;
 
 
-  app.ModalView = app.View.extend({
+  app.ModalView = Backbone.View.extend({
     className: 'modal',
 
     //todo: have base modal template

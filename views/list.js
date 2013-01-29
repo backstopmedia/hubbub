@@ -5,7 +5,7 @@
   var _ = window._;
   var app = window.app;
 
-  app.ListView = app.View.extend({
+  app.ListView = Backbone.View.extend({
     initialize: function () {
       this.views = {};
       this.listenTo(this.collection, {
