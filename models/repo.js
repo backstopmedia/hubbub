@@ -3,6 +3,7 @@
 
   var _ = window._;
   var app = window.app;
+  var Backbone = window.Backbone;
 
   var Repo = app.Repo = app.Repo || {};
 
@@ -19,7 +20,7 @@
       this.issues = new app.Issue.Collection();
       this.issues.repo = this;
 
-      // When this is destroyed, destroy its issues too.
+      // When this repo is destroyed, destroy its issues too.
       this.on('destroy', function () {
         _.invoke(this.issues.models.slice(), 'destroy');
       });

@@ -28,7 +28,7 @@
           this.save();
         },
         remove: function (repo) {
-          this.issues.stopListening(repo);
+          this.issues.stopListening(repo.issues, 'add', this.issues.add);
           this.save();
         }
       });
