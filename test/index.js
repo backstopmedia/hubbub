@@ -1,18 +1,9 @@
 window.jQuery(function () {
 
-  var module = window.module;
   var _ = window._;
   var app = window.app;
-  var ok = window.ok;
   var test = window.test;
   var equal = window.equal;
-
-  module('Hubbub', {
-    setup: function() {
-      // clear localStorage before each test
-      window.localStorage.clear();
-    }
-  });
 
   test('repo url is correct', function () {
     var repo = new app.Repo.Model({
@@ -41,9 +32,7 @@ window.jQuery(function () {
   });
 
   test('adding a repo to the board should persist the repo', function () {
-    // TODO simplify this test
     var board = new app.Board.Model();
-    board.save();
     var repo = new app.Repo.Model({
       id: 1,
       name: 'backbone',
