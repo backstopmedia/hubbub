@@ -87,15 +87,6 @@
       </div>
     </script>
 
-    <script id='js-repo-list-template' type='text/template'>
-      <% repos.each(function (repo) { %>
-        <li>
-          <%- repo.displayName() %>
-          <a data-repo-id='<%= repo.id %>' class='js-repo-remove btn btn-danger btn-small'>Remove</a>
-        </li>
-      <% }); %>
-    </script>
-
     <script id='js-sidebar-template' type='text/template'>
       <div class='repo-search'>
         <form class='form-search js-repo-search-form'>
@@ -147,7 +138,6 @@
     <script src='views/item.js'></script>
     <script src='views/issue-holder.js'></script>
     <script src='views/issue-list.js'></script>
-    <script src='views/repo-list.js'></script>
     <script src='views/modal.js'></script>
     <script src='views/issue-modal.js'></script>
     <script src='views/welcome-modal.js'></script>
