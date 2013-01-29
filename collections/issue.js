@@ -13,7 +13,7 @@
     // Default sorting for issues will be reverse chronological order, newest
     // on top.
     comparator: function (issue) {
-      return -+new Date(issue.get('created_at'));
+      return -1 * Date.parse(issue.get('created_at'));
     },
 
     url: function () {
