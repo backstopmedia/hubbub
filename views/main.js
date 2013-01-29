@@ -11,7 +11,7 @@
     render: function () {
       // create and insert each of the columns
 
-      this.sideBarView = new app.SidebarView({collection:app.board.repos});
+      this.sideBarView = new app.SidebarView();
       this.defaultIssuesView = new app.IssueHolderView({testKey:"category", testValue:"default", title:"Uncategorized"});
       this.todoIssuesView = new app.IssueHolderView({testKey:"category", testValue:"todo", title:"To Do"});
       this.doingIssuesView = new app.IssueHolderView({testKey:"category", testValue:"doing", title:"Doing"});
