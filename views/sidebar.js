@@ -5,7 +5,7 @@
   var _ = window._;
   var app = window.app;
 
-  var addRe = /^(\w+)(?:\/([\w.\-]+))?$/;
+  var searchRegex = /^(\w+)(?:\/([\w.\-]+))?$/;
   var resultsTemplate = _.template($('#js-search-results-template').html());
 
   app.SidebarView = Backbone.View.extend({
@@ -34,8 +34,8 @@
     },
 
     search: function () {
-      var val = this.$('#js-add-input').val();
-      var match = val.match(addRe);
+      var val = this.$('#js-repo-search-input').val();
+      var match = val.match(searchRegex);
       if (!match) {
         this.message('Please enter a valid user or user/repo combo.', 'error');
         return false;
@@ -55,7 +55,7 @@
         var repos = app.Repo.Collection.withOwner(match[1]);
         this.fetchRepos(repos);
       }
-      this.$('#js-add-input').val('');
+      this.$('#js-repo-search-input').val('');
       return false;
     },
 
