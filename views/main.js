@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  var Backbone = window.Backbone;
   var $ = window.jQuery;
   var _ = window._;
   var app = window.app;
@@ -65,12 +66,8 @@
       });
     },
 
-    closeModals: function () {
-      // ...if they exist
-
-      if (this.welcomeModal) {
-        this.welcomeModal.close();
-      }
+    closeIssueModal: function () {
+      // ...if it exists
       if (this.issueModal) {
         this.issueModal.close();
       }

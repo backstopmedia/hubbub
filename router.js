@@ -19,7 +19,7 @@
     },
 
     manage: function () {
-      this.mainView.closeModals();
+      this.mainView.closeIssueModal();
     },
 
     issue: function (issueId) {
