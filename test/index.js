@@ -5,6 +5,8 @@ window.jQuery(function () {
   var test = window.test;
   var equal = window.equal;
 
+  module('Hubbub');
+
   test('repo url is correct', function () {
     var repo = new app.Repo.Model({
       name: 'backbone',

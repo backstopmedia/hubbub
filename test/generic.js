@@ -27,7 +27,7 @@ window.jQuery(function () {
     {"id": 10172489, "title": "Reverting changes from #2003 and 1f3f45252f", "number": 2173, "repoId": 952189, "category": "done", "comments": 3, "created_at": "2013-01-21T21:36:58Z"}
   ];
 
-  module('Generic Tests', {
+  module('Generic', {
     setup: function () {
       // setup
     }
