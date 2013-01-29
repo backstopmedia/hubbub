@@ -20,13 +20,16 @@
 
     render: function () {
       this.$el.html(this.template({repos: this.collection}));
-      this.repoFilterView = new app.ListView({
+
+      var repoFilterView = this.repoFilterView = new app.ListView({
         tagName: 'ul',
         className: 'js-repo-filter',
         collection: app.board.repos,
         modelView: app.RepoFilterItemView
       });
-      this.repoFilterView.render().$el.appendTo(this.$el);
+      repoFilterView.render();
+      repoFilterView.$el.appendTo(this.$el);
+
       return this;
     },
 
