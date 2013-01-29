@@ -105,9 +105,9 @@
               app.board.repos.add(repo);
               self.message();
             },
-            error: function (__, xhr) {
+            error: function (model, xhr) {
               repo.destroy();
-              self.syncError(__, xhr);
+              self.syncError(model, xhr);
             }
           });
         },
@@ -117,7 +117,7 @@
       });
     },
 
-    syncError: function (__, xhr) {
+    syncError: function (model, xhr) {
       this.message(xhr.status + ' ' + xhr.data.message, 'error');
     }
   });

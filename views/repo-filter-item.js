@@ -47,7 +47,7 @@
       this.clearStatus(5000);
     },
 
-    onError: function (__, xhr) {
+    onError: function (model, xhr) {
       this.$el
         .attr('title', xhr.status + ' Error: ' + xhr.data.message)
         .removeClass('js-pending js-success').addClass('js-error');

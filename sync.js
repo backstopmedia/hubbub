@@ -78,7 +78,7 @@
   var ajax = Backbone.ajax;
   Backbone.ajax = function (options) {
     var success = options.success;
-    options.success = function (resp, __, xhr) {
+    options.success = function (resp, status, xhr) {
       var meta = xhr.meta = resp.meta;
       var data = xhr.data = resp.data;
       xhr.status = meta.status;
