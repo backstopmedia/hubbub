@@ -20,9 +20,11 @@
       return this.repo.url() + '/issues';
     },
 
+    // Specify that this Collection should represent a filtered set of models from the provided `parent` Collection.
     setFilter: function(parent, testKey, testValue) {
       var self = this;
       var onAdd = function(model) {
+        // only add to this collection if the model passes the filter
         if (model.get(testKey) === testValue) {
           self.add(model);
         }
@@ -39,7 +41,7 @@
       });
       // Listen to change events on the models
       this.listenTo(parent, 'change:' + testKey, function(model, value) {
-        if(value === testValue){
+        if (value === testValue) {
           // If the new value matches the test value then add the model
           self.add(model);
         } else {
