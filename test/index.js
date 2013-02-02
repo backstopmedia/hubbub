@@ -9,28 +9,20 @@ window.jQuery(function () {
 
   test('repo url is correct', function () {
     var repo = new app.Repo.Model({
-      name: 'backbone',
+      name: 'hubbub',
       owner: {login: 'backstopmedia'}
     });
-    var url = 'https://api.github.com/repos/backstopmedia/backbone';
+    var url = 'https://api.github.com/repos/backstopmedia/hubbub';
     equal(_.result(repo, 'url'), url);
   });
 
   test('repo issues url is correct', function () {
     var repo = new app.Repo.Model({
-      name: 'backbone',
+      name: 'hubbub',
       owner: {login: 'backstopmedia'}
     });
-    var url = 'https://api.github.com/repos/backstopmedia/backbone/issues';
+    var url = 'https://api.github.com/repos/backstopmedia/hubbub/issues';
     equal(_.result(repo.issues, 'url'), url);
-  });
-
-  test('repo should have an owner/name style displayName', function () {
-    var repo = new app.Repo.Model({
-      name: 'backbone',
-      owner: {login: 'backstopmedia'}
-    });
-    equal(repo.displayName(), 'backstopmedia/backbone');
   });
 
   test('app.Repo.Collection.withOwner() should set the `url`', function () {

@@ -11,7 +11,7 @@
       <ul>
         <% repos.each(function (repo) { %>
           <li>
-            <a class='js-repo-result' data-repo-id='<%= repo.id %>'><%- repo.displayName() %></a>
+            <a class='js-repo-result' data-repo-id='<%= repo.id %>'><%- repo.get('full_name') %></a>
           </li>
         <% }); %>
       </ul>
@@ -24,7 +24,7 @@
     <script id='js-issue-item-template' type='text/template'>
       <a href='#issues/<%- issue.id %>'>
         <strong>
-          <%- issue.repo.displayName() %>#<%- issue.get('number') %>
+          <%- issue.repo.get('full_name') %>#<%- issue.get('number') %>
         </strong>
         <br>
         <%- issue.get('title') %>
@@ -39,7 +39,7 @@
             <a target='_blank' href='<%- issue.get('html_url') %>'>
               <div class='modal-top-line'>
                 <div class='issue-repo'>
-                  <%- issue.repo.displayName() %>
+                  <%- issue.repo.get('full_name') %>
                 </div>
                 <div class='issue-number'>
                   #<%= issue.get('number') %>
@@ -103,7 +103,7 @@
       <nobr>
         <label>
           <input type='checkbox' <%= repo.get('isActive') ? ' checked' : '' %>>
-          <%- repo.displayName() %>
+          <%- repo.get('full_name') %>
         </label>
         <i class='js-refresh icon-refresh'></i>
         <i class='js-remove icon-remove'></i>

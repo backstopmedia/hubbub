@@ -12,10 +12,6 @@
       isActive: true
     },
 
-    displayName: function () {
-      return this.get('owner').login + '/' + this.get('name');
-    },
-
     initialize: function () {
       this.issues = new app.Issue.Collection();
       this.issues.repo = this;
