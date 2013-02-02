@@ -23,9 +23,7 @@
     },
 
     url: function () {
-      var login = this.get('owner').login;
-      var name = this.get('name');
-      return app.apiRoot + '/repos/' + login + '/' + name;
+      return app.apiRoot + '/repos/' + this.get('full_name');
     },
 
     urlRoot: function () {
