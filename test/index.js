@@ -9,20 +9,20 @@ window.jQuery(function () {
 
   test('repo url is correct', function () {
     var repo = new app.Repo.Model({
+      full_name: 'backstopmedia/hubbub',
       name: 'hubbub',
       owner: {login: 'backstopmedia'}
     });
-    var url = 'https://api.github.com/repos/backstopmedia/hubbub';
-    equal(_.result(repo, 'url'), url);
+    equal(_.result(repo, 'url'), 'https://api.github.com/repos/backstopmedia/hubbub');
   });
 
   test('repo issues url is correct', function () {
     var repo = new app.Repo.Model({
+      full_name: 'backstopmedia/hubbub',
       name: 'hubbub',
       owner: {login: 'backstopmedia'}
     });
-    var url = 'https://api.github.com/repos/backstopmedia/hubbub/issues';
-    equal(_.result(repo.issues, 'url'), url);
+    equal(_.result(repo.issues, 'url'), 'https://api.github.com/repos/backstopmedia/hubbub/issues');
   });
 
   test('app.Repo.Collection.withOwner() should set the `url`', function () {
