@@ -127,8 +127,4 @@ window.jQuery(function () {
     equal(done.length, 4); // All 4 models are now, in the done collection
   });
 
-
-
-
-
 });
