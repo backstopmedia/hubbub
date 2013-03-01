@@ -115,7 +115,7 @@ window.jQuery(function () {
     equal(counts.doing, grouped.doing.length);
   });
 
-  test('collection: setFilter meothd', function () {
+  test('collection: setFilter method', function () {
     var issues = new app.Issue.Collection(testData);
     var done = new app.Issue.Collection();
     done.setFilter(issues, "category", "done");
