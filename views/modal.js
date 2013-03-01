@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  var $ = window.jQuery;
   var app = window.app;
-  var _ = window._;
+  var Backbone = window.Backbone;
+  var $ = window.jQuery;
 
 
   app.ModalView = Backbone.View.extend({
