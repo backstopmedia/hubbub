@@ -45,4 +45,34 @@ window.jQuery(function () {
     repo.destroy();
     board.destroy();
   });
+
+  asyncTest('repos remote fetch works', function () {
+    var repo = new app.Repo.Model({
+      id: 1,
+      name: 'hubbub',
+      full_name:'backstopmedia/hubbub',
+      owner: {login: 'backstopmedia'}
+    });
+    repo.fetch({
+      remote:true,
+      success: function() {
+        ok(repo.has('archive_url'));
+        start();
+      }
+    });
+  });
+
+  test('repos toBoard method products correct data', function () {
+    var repo = new app.Repo.Model({
+      id: 1,
+      name: 'hubbub',
+      full_name:'backstopmedia/hubbub',
+      owner: {login: 'backstopmedia'}
+    });
+    deepEqual(repo.toBoard(), {
+      id: 1,
+      name: 'hubbub',
+      owner: {login: 'backstopmedia'}
+    });
+  });
 });
