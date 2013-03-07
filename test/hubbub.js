@@ -75,4 +75,24 @@ window.jQuery(function () {
       owner: {login: 'backstopmedia'}
     });
   });
+
+  test('collection: setFilter method', function () {
+    var testData = [
+      {"id": 10338616, "title": "Comparator and fat arrow", "number": 2195, "repoId": 952189, "category": "doing", "comments": 5, "created_at": "2013-01-26T14:35:16Z"},
+      {"id": 10341232, "title": "trigger calls unbinded event handlers", "number": 2198, "repoId": 952189, "category": "todo", "comments": 21, "created_at": "2013-01-26T18:26:53Z"},
+      {"id": 10339785, "title": "All Code refactoring", "number": 2196, "repoId": 952189, "category": "doing", "comments": 1, "created_at": "2013-01-26T16:29:40Z"},
+      {"id": 10172489, "title": "Reverting changes from #2003 and 1f3f45252f", "number": 2173, "repoId": 952189, "category": "done", "comments": 3, "created_at": "2013-01-21T21:36:58Z"}
+    ];
+
+    var issues = new app.Issue.Collection(testData);
+    var done = new app.Issue.Collection();
+    done.setFilter(issues, "category", "done");
+
+    equal(done.length, 1); // Contains just the one model with a done category
+    issues.get(10172489).set("category","doing");
+    equal(done.length, 0); // Contains no models as the one model with a 'done' key  had its category changed to doing
+    issues.invoke("set", "category", "done");
+    equal(done.length, 4); // All 4 models are now, in the done collection
+  });
+
 });
