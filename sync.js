@@ -71,7 +71,7 @@
     }
 
     // Fire the success callback.
-    options.success(model, res, options);
+    options.success(res);
   };
 
   // Override `Backbone.ajax` for JSONP support.
