@@ -25,10 +25,7 @@
         // If there was a match in the second capture group, the entry is for
         // a repo.
       } else if (match[2]) {
-        var repo = new app.Repo.Model({
-          name: match[2],
-          owner: {login: match[1]}
-        });
+        var repo = new app.Repo.Model({full_name: match[0]});
         this.addRepo(repo);
 
         // Without a second capture group, the user must be searching for a
