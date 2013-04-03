@@ -72,7 +72,7 @@
       this.message('Fetching repo...', 'pending');
       this.$('#js-repo-search-list').addClass('empty');
       var self = this;
-      repo.fetch({
+      repo.set('isActive', true).fetch({
         remote: true,
 
         // If we successfully fetched the repo, add it to the user's repo list
