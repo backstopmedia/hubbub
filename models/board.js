@@ -39,7 +39,7 @@
     },
 
     parse: function (res) {
-      this.repos.update(res.repos);
+      this.repos.set(res.repos);
 
       // **Don't** fetch on the collection (i.e. repos.fetch()), but
       // individually as the repos collection spans many owners and the
