@@ -72,8 +72,7 @@
           repo.issues.on('remove', remove);
           repo.issues.fetch({
             remote: true,
-            update: true,
-            complete: function () { repo.issues.off('remove', remove); }
+            success: function () { repo.issues.off('remove', remove); }
           });
         }
       });

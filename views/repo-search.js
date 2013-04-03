@@ -83,7 +83,6 @@
         success: function () {
           self.message('Repo found, fetching issues...', 'pending');
           repo.issues.fetch({
-            update: true,
             remote: true,
             success: function () {
               app.board.repos.add(repo);

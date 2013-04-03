@@ -45,7 +45,7 @@
       // individually as the repos collection spans many owners and the
       // issues collection spans many repos.
       this.repos.invoke('fetch');
-      _.invoke(_.pluck(this.repos.models, 'issues'), 'fetch', {update: true});
+      _.invoke(_.pluck(this.repos.models, 'issues'), 'fetch');
       delete res.repos;
       return res;
     },
