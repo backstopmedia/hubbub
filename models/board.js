@@ -19,12 +19,15 @@
       this.issues = new app.Issue.Collection();
 
       this.on('change', function () { this.save(); });
+      var self = this;
 
       // Save the board when a repo is added or removed.
       this.listenTo(this.repos, {
         add: function (repo) {
           this.issues.add(repo.issues.models);
-          this.issues.listenTo(repo.issues, 'add', this.issues.add);
+          this.issues.listenTo(repo.issues, 'add', function(issue){
+            self.issues.add(issue);
+          });
           this.save();
         },
         remove: function (repo) {
