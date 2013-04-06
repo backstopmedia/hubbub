@@ -19,19 +19,18 @@
       this.issues = new app.Issue.Collection();
 
       this.on('change', function () { this.save(); });
-      var self = this;
+
+      var addIssue = function (issue) { this.add(issue); };
 
       // Save the board when a repo is added or removed.
       this.listenTo(this.repos, {
         add: function (repo) {
           this.issues.add(repo.issues.models);
-          this.issues.listenTo(repo.issues, 'add', function(issue){
-            self.issues.add(issue);
-          });
+          this.issues.listenTo(repo.issues, 'add', addIssue);
           this.save();
         },
         remove: function (repo) {
-          this.issues.stopListening(repo.issues, 'add', this.issues.add);
+          this.issues.stopListening(repo.issues, 'add', addIssue);
           this.save();
         }
       });
