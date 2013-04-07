@@ -1,9 +1,13 @@
 /* Require Bootstrap styles. */
 @import "bootstrap.css";
 
+* {
+  word-wrap: break-word;
+}
+
 body {
   margin: 0;
-  padding: 10px 0;
+  padding: 0;
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, 'Lucida Grande', Arial, sans-serif;
 }
@@ -12,26 +16,38 @@ a {
   cursor: pointer;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
+#app-container {
+  min-width: 1000px;
+}
+
 .box {
   padding: 10px;
   border: 1px solid #333;
   color: #333;
-  background: #CCC;
+  background: #ccc;
 }
 .js-pending {
   border-color: #660;
   color: #660;
-  background: #FFC;
+  background: #ffc;
 }
 
 .js-error {
   border-color: #600;
   color: #600;
-  background: #FCC;
+  background: #fcc;
+}
+
+.form-search label {
+  font-weight: bold;
 }
 
 .js-success {
   border-color: #060;
   color: #060;
-  background: #CFC;
+  background: #cfc;
 }

@@ -14,18 +14,12 @@
   //  C. Not have to alter any other Backbone methods to do so.
   Backbone.sync = function (method, model, options) {
 
-    // Ensure an options object.
-    options = (options || {});
-
     // READ is the only case to proxy to the original `Backbone.sync`,
     // but only if the `options.remote` flag is set to `true`.
     if (method === 'read' && options.remote) {
-      options.data = _.extend({}, options.data, {per_page: 100});
+      options.data = _.extend({per_page: 100}, options.data);
       return sync.apply(this, arguments);
     }
-
-    // Trigger the `'request'` event (for symmetry with stock sync).
-    model.trigger('request', model, {}, options);
 
     // Use `localStorage` for persistence.
     var ls = window.localStorage;
@@ -51,10 +45,10 @@
 
       // In the CREATE case, we need to give the model a unique `id`.
       if (method === 'create') {
-        var next = 1;
+        var available = 1;
         // Iterate over the existing `id`s and find the next available one.
-        for (var id in models) if (next < +id) next = +id + 1;
-        res.id = next;
+        for (var id in models) if (available <= id) available = +id + 1;
+        res.id = available;
       }
 
       // Save the model to `localStorage`
@@ -66,7 +60,7 @@
     case 'read':
       res = model instanceof Backbone.Model ?
         models[model.id] || {} :
-        _.values(models) || [];
+        _.values(models);
       break;
 
     // Destroy a model from `localStorage` based on its endpoint.
@@ -77,17 +71,14 @@
     }
 
     // Fire the success callback.
-    options.success(model, res, options);
-
-    // Trigger the `'sync'` event.
-    model.trigger('sync', model, res, options);
+    options.success(res);
   };
 
   // Override `Backbone.ajax` for JSONP support.
   var ajax = Backbone.ajax;
   Backbone.ajax = function (options) {
     var success = options.success;
-    options.success = function (resp, __, xhr) {
+    options.success = function (resp, status, xhr) {
       var meta = xhr.meta = resp.meta;
       var data = xhr.data = resp.data;
       xhr.status = meta.status;
