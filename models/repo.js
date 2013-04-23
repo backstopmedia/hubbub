@@ -8,10 +8,6 @@
   var Repo = app.Repo = app.Repo || {};
 
   Repo.Model = Backbone.Model.extend({
-    defaults: {
-      isActive: true
-    },
-
     initialize: function () {
       this.issues = new app.Issue.Collection();
       this.issues.repo = this;

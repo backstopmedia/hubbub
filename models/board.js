@@ -20,15 +20,17 @@
 
       this.on('change', function () { this.save(); });
 
+      var addIssue = function (issue) { this.add(issue); };
+
       // Save the board when a repo is added or removed.
       this.listenTo(this.repos, {
         add: function (repo) {
           this.issues.add(repo.issues.models);
-          this.issues.listenTo(repo.issues, 'add', this.issues.add);
+          this.issues.listenTo(repo.issues, 'add', addIssue);
           this.save();
         },
         remove: function (repo) {
-          this.issues.stopListening(repo.issues, 'add', this.issues.add);
+          this.issues.stopListening(repo.issues, 'add', addIssue);
           this.save();
         }
       });
@@ -39,13 +41,13 @@
     },
 
     parse: function (res) {
-      this.repos.update(res.repos);
+      this.repos.set(res.repos);
 
       // **Don't** fetch on the collection (i.e. repos.fetch()), but
       // individually as the repos collection spans many owners and the
       // issues collection spans many repos.
       this.repos.invoke('fetch');
-      _.invoke(_.pluck(this.repos.models, 'issues'), 'fetch', {update: true});
+      _.invoke(_.pluck(this.repos.models, 'issues'), 'fetch');
       delete res.repos;
       return res;
     },

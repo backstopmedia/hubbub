@@ -25,10 +25,7 @@
         // If there was a match in the second capture group, the entry is for
         // a repo.
       } else if (match[2]) {
-        var repo = new app.Repo.Model({
-          name: match[2],
-          owner: {login: match[1]}
-        });
+        var repo = new app.Repo.Model({full_name: match[0]});
         this.addRepo(repo);
 
         // Without a second capture group, the user must be searching for a
@@ -75,7 +72,7 @@
       this.message('Fetching repo...', 'pending');
       this.$('#js-repo-search-list').addClass('empty');
       var self = this;
-      repo.fetch({
+      repo.set('isActive', true).fetch({
         remote: true,
 
         // If we successfully fetched the repo, add it to the user's repo list
@@ -83,7 +80,6 @@
         success: function () {
           self.message('Repo found, fetching issues...', 'pending');
           repo.issues.fetch({
-            update: true,
             remote: true,
             success: function () {
               app.board.repos.add(repo);

@@ -115,16 +115,5 @@ window.jQuery(function () {
     equal(counts.doing, grouped.doing.length);
   });
 
-  test('collection: setFilter method', function () {
-    var issues = new app.Issue.Collection(testData);
-    var done = new app.Issue.Collection();
-    done.setFilter(issues, "category", "done");
-
-    equal(done.length, 1); // Contains just the one model with a done category
-    issues.get(10172489).set("category","doing");
-    equal(done.length, 0); // Contains no models as the one model with a 'done' key  had its category changed to doing
-    issues.invoke("set", "category", "done");
-    equal(done.length, 4); // All 4 models are now, in the done collection
-  });
 
 });
