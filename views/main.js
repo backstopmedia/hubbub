@@ -8,26 +8,24 @@
 
   app.MainView = Backbone.View.extend({
 
+    initialize : function() {
+      this.views = {};
+    },
+
     render: function () {
       // create and insert each of the columns
 
       this.sideBarView = new app.SidebarView();
-      this.defaultIssuesView = new app.IssueHolderView({testKey:"category", testValue:"default", title:"Uncategorized"});
-      this.todoIssuesView = new app.IssueHolderView({testKey:"category", testValue:"todo", title:"To Do"});
-      this.doingIssuesView = new app.IssueHolderView({testKey:"category", testValue:"doing", title:"Doing"});
-      this.doneIssuesView = new app.IssueHolderView({testKey:"category", testValue:"done", title:"Done"});
-
-      var $issueLists = $('<div class="issue-lists">');
-      $issueLists.append(
-        this.defaultIssuesView.render().el,
-        this.todoIssuesView.render().el,
-        this.doingIssuesView.render().el,
-        this.doneIssuesView.render().el
-      );
+      this.views.defaultIssuesView = new app.IssueHolderView({testKey:"category", testValue:"default", title:"Uncategorized"});
+      this.views.todoIssues = new app.IssueHolderView({testKey:"category", testValue:"todo", title:"To Do"});
+      this.views.doingIssues = new app.IssueHolderView({testKey:"category", testValue:"doing", title:"Doing"});
+      this.views.doneIssues = new app.IssueHolderView({testKey:"category", testValue:"done", title:"Done"});
 
       this.$el.append(
         this.sideBarView.render().el,
-        $issueLists
+        $('<div class="issue-lists">').html(
+          _.chain(this.views).invoke('render').pluck('el').value()
+        )
       );
 
 
@@ -76,10 +74,7 @@
     remove: function () {
       // make sure each of the columns are removed
       this.sideBarView.remove();
-      this.defaultIssuesView.remove();
-      this.todoIssuesView.remove();
-      this.doingIssuesView.remove();
-      this.doneIssuesView.remove();
+      _.invoke(this.views, 'remove');
       return Backbone.View.prototype.remove.call(this);
     }
   });
